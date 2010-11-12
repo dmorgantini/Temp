@@ -19,17 +19,21 @@
     Tour *tour;
     CrumbPath *crumbs;
     CrumbPathView *crumbView;
-    UIBarButtonItem *toggleRecordButton;
+    UIBarButtonItem *startRecordButton;
+    UIBarButtonItem *stopRecordButton;
     UIToolbar *toolbar;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) Tour *tour;
-@property (nonatomic, retain) UIBarButtonItem *toggleRecordButton;
+@property (nonatomic, retain) UIBarButtonItem *startRecordButton;
+@property (nonatomic, retain) UIBarButtonItem *stopRecordButton;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 
 
--(void) toggleRecording:(id) sender;
+-(void) startRecording:(id) sender;
+-(void) stopRecording:(id) sender;
+-(void) initToolbar: recordActionButton;
 
 @end

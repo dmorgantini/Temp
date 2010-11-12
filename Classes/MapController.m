@@ -11,7 +11,7 @@
 
 @implementation MapController
 
-@synthesize locationManager, mapView, tour, toggleRecordButton, toolbar;
+@synthesize locationManager, mapView, tour, startRecordButton, stopRecordButton, toolbar;
 
 -(BOOL) isCoordinate:(CLLocationCoordinate2D) first equalTo: (CLLocationCoordinate2D) second
 {
@@ -26,19 +26,23 @@
     self.locationManager.delegate = self; // Tells the location manager to send updates to this object
         
     // TODO: Should this be configurable?
-    self.locationManager.distanceFilter = 10;
+    
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     
     
-    toggleRecordButton = [[UIBarButtonItem alloc] initWithTitle:@"Record" 
+    startRecordButton = [[UIBarButtonItem alloc] initWithTitle:@"Record" 
                                                   style:UIBarButtonItemStyleBordered 
                                                   target:self 
-                                                  action:@selector(toggleRecording:)];
+                                                  action:@selector(startRecording:)];
+
+    stopRecordButton = [[UIBarButtonItem alloc] initWithTitle:@"Stop" 
+                                                         style:UIBarButtonItemStyleBordered 
+                                                        target:self 
+                                                        action:@selector(stopRecording:)];
     
     
-    [toggleRecordButton setPossibleTitles:[NSSet setWithObjects:@"Record", @"Stop", nil]];
     
-    [toolbar setItems:[NSArray arrayWithObject:toggleRecordButton]];
+    [self initToolbar:startRecordButton];
     
 }
 
@@ -98,25 +102,21 @@
     
 }
 
--(void) doToggle
+-(void) initToolbar: (id) recordActionButton
 {
-    if (toggleRecordButton.title == @"Record")
-    {
-//        [self.locationManager startUpdatingLocation];    
-        
-        [toggleRecordButton setTitle:@"Stop"];
-    }
-    else
-    {
-//        [self.locationManager stopUpdatingLocation];
-        [toggleRecordButton setTitle: @"Record"];
-    }
-    
+    [toolbar setItems:[NSArray arrayWithObject:recordActionButton]];
 }
 
--(void) toggleRecording :(id) sender
+-(void) startRecording :(id) sender
 {
-    [self doToggle];
+    [self initToolbar:stopRecordButton];
+    [locationManager startUpdatingLocation];
+}
+
+-(void) stopRecording :(id) sender
+{
+    [self initToolbar:startRecordButton];
+    [locationManager stopUpdatingLocation];
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
