@@ -54,7 +54,12 @@
     {
         return;
     }
-        
+     
+    bool addedToMap = [self.tour addRouteLocation: newLocation];
+    
+    if (!addedToMap)
+        return;
+    
     if (!crumbs)
     {
         // This is the first time we're getting a location update, so create
@@ -64,11 +69,12 @@
         
         crumbs = [[CrumbPath alloc] initWithCenterCoordinate:newLocation.coordinate];
         [mapView addOverlay:crumbs];
-        
+            
         // On the first location update only, zoom map to user location
         MKCoordinateRegion region = 
         MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 2000, 2000);
         [mapView setRegion:region animated:YES];
+        
     }
     else
     {
@@ -83,6 +89,10 @@
         // 
         
         // perhaps check for some sort of accuracy/timestamp as well
+        
+
+        
+        
         MKMapRect updateRect = [crumbs addCoordinate:newLocation.coordinate];
         
         if (!MKMapRectIsNull(updateRect))

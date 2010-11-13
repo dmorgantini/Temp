@@ -26,7 +26,18 @@
 	return self;
 }
 
--(void)startRecording: (CLLocationCoordinate2D)coord{
+-(bool) addRouteLocation:(CLLocation *)newLocation
+{
+    // do the analysation of the location right here... accuracy etc
+    if (newLocation.horizontalAccuracy <= 50)
+        return NO;
+    
+    NSTimeInterval timeInterval = [newLocation.timestamp timeIntervalSinceNow];
+    
+    if (timeInterval > 60) // more than 60secs since last update
+        return NO;
+    
+    return YES;
     
 }
 

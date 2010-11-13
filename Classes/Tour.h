@@ -19,7 +19,8 @@
 }
 
 -(Tour*) initNew;
--(void) startRecording:(CLLocationCoordinate2D)coord;
+-(bool) addRouteLocation: (CLLocation *) newLocation;
+
 
 @property (nonatomic, retain) TourDetails* details;
 @property (nonatomic) bool isNew;
