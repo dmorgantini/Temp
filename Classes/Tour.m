@@ -37,6 +37,9 @@
     if (timeInterval > 60) // more than 60secs since last update
         return NO;
     
+    
+    [self.route addLocation: newLocation];
+    
     return YES;
     
 }

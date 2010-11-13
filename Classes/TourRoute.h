@@ -7,10 +7,14 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import <MapKit/MapKit.h>
 
 @interface TourRoute : NSObject {
-
+    NSMutableSet* locations;
 }
+
+@property (nonatomic, retain) NSMutableSet* locations;
+
+-(void) addLocation: (CLLocation*) location;
 
 @end

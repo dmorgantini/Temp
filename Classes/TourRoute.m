@@ -11,4 +11,28 @@
 
 @implementation TourRoute
 
+@synthesize locations;
+
+-(TourRoute*) init
+{
+    self = [super init];
+    
+    if (self)
+    {
+        [locations init];
+    }
+    return self;
+}
+
+-(void) addLocation:(CLLocation *)location
+{
+    [self.locations addObject:location];
+    
+}
+
+- (void)dealloc {
+    self.locations = nil;
+    [super dealloc];
+}
+
 @end
