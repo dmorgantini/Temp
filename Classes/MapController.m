@@ -9,6 +9,7 @@
 #import "MapController.h"
 #import "Tour.h"
 #import "Waypoint.h"
+#import "Alert.h"
 
 typedef enum {
     recordingToolbar,
@@ -158,6 +159,9 @@ saveTourButton, nextToobarButton, previousToobarButton, currentButton;
     
     if (shouldAddWaypoint)
         [self.mapView addAnnotation: newWaypoint];
+    else
+        [Alert showAlert: @"Waypoint too close" withMessage: @"Unable to add waypoint, ensure that you have moved some distance (10m) from the previous waypoint"];
+    
     
     [newWaypoint release];
     

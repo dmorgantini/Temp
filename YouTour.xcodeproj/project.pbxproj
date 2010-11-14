@@ -23,7 +23,8 @@
 		D6100FFC1288FC0C0039B1B8 /* CrumbPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6100FFB1288FC0C0039B1B8 /* CrumbPathView.m */; };
 		D611AFBC127E7A220005FB6A /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = D611AFBA127E7A220005FB6A /* MapController.m */; };
 		D611AFBD127E7A220005FB6A /* MapController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D611AFBB127E7A220005FB6A /* MapController.xib */; };
-		D61F575512836CCD00F4A305 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D61F575412836CCD00F4A305 /* MapView.xib */; };
+		D680AACB12907FB800941EB1 /* Waypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = D680AACA12907FB800941EB1 /* Waypoint.m */; };
+		D680AACE1290834E00941EB1 /* WaypointList.m in Sources */ = {isa = PBXBuildFile; fileRef = D680AACD1290834E00941EB1 /* WaypointList.m */; };
 		D686AE8C127F3CD800B5B42B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D686AE8B127F3CD800B5B42B /* MapKit.framework */; };
 		D6B2EAC9127E1EC100608207 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B2EAC8127E1EC100608207 /* Alert.m */; };
 		D6B348061282674800FA6876 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B348051282674800FA6876 /* CoreLocation.framework */; };
@@ -54,12 +55,15 @@
 		D6014ABE127A436B00606634 /* Tour.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tour.m; sourceTree = "<group>"; };
 		D6100FF71288FB110039B1B8 /* TourRoute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TourRoute.h; sourceTree = "<group>"; };
 		D6100FF81288FB110039B1B8 /* TourRoute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TourRoute.m; sourceTree = "<group>"; };
-		D6100FFA1288FC0C0039B1B8 /* CrumbPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CrumbPathView.h; sourceTree = "<group>"; };
+		D6100FFA1288FC0C0039B1B8 /* CrumbPathView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrumbPathView.h; sourceTree = "<group>"; };
 		D6100FFB1288FC0C0039B1B8 /* CrumbPathView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrumbPathView.m; sourceTree = "<group>"; };
 		D611AFB9127E7A220005FB6A /* MapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
 		D611AFBA127E7A220005FB6A /* MapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
 		D611AFBB127E7A220005FB6A /* MapController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapController.xib; path = Classes/MapController.xib; sourceTree = "<group>"; };
-		D61F575412836CCD00F4A305 /* MapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
+		D680AAC912907FB800941EB1 /* Waypoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waypoint.h; sourceTree = "<group>"; };
+		D680AACA12907FB800941EB1 /* Waypoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Waypoint.m; sourceTree = "<group>"; };
+		D680AACC1290834E00941EB1 /* WaypointList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaypointList.h; sourceTree = "<group>"; };
+		D680AACD1290834E00941EB1 /* WaypointList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaypointList.m; sourceTree = "<group>"; };
 		D686AE8B127F3CD800B5B42B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		D6B2EAC7127E1EC100608207 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alert.h; sourceTree = "<group>"; };
 		D6B2EAC8127E1EC100608207 /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alert.m; sourceTree = "<group>"; };
@@ -130,7 +134,6 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				D61F575412836CCD00F4A305 /* MapView.xib */,
 				D6EF93F012812EBB0002ED30 /* WaypointsView.xib */,
 				D6014A7B127A27B300606634 /* TourDetailsController.xib */,
 				D611AFBB127E7A220005FB6A /* MapController.xib */,
@@ -156,6 +159,10 @@
 		D6014A84127A27D800606634 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D680AACC1290834E00941EB1 /* WaypointList.h */,
+				D680AACD1290834E00941EB1 /* WaypointList.m */,
+				D680AAC912907FB800941EB1 /* Waypoint.h */,
+				D680AACA12907FB800941EB1 /* Waypoint.m */,
 				D6100FF71288FB110039B1B8 /* TourRoute.h */,
 				D6100FF81288FB110039B1B8 /* TourRoute.m */,
 				D6014A85127A280100606634 /* TourDetails.h */,
@@ -253,7 +260,6 @@
 				D6014A7D127A27B300606634 /* TourDetailsController.xib in Resources */,
 				D611AFBD127E7A220005FB6A /* MapController.xib in Resources */,
 				D6EF93F112812EBB0002ED30 /* WaypointsView.xib in Resources */,
-				D61F575512836CCD00F4A305 /* MapView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +281,8 @@
 				D6F21ACC1284F5D000BDE57E /* CrumbPath.m in Sources */,
 				D6100FF91288FB110039B1B8 /* TourRoute.m in Sources */,
 				D6100FFC1288FC0C0039B1B8 /* CrumbPathView.m in Sources */,
+				D680AACB12907FB800941EB1 /* Waypoint.m in Sources */,
+				D680AACE1290834E00941EB1 /* WaypointList.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

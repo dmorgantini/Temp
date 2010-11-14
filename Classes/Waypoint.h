@@ -13,4 +13,6 @@
 
 }
 
+-(bool) isTooCloseToo: (Waypoint*) waypoint;
+
 @end

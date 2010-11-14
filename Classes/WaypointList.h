@@ -8,9 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+@class Waypoint;
 
 @interface WaypointList : NSObject {
-
+    NSMutableArray* waypoints;
 }
+
+-(bool) add: (Waypoint*) waypoint;
+
 
 @end

@@ -8,6 +8,7 @@
 
 #import "Waypoint.h"
 
+#define MINIMUM_DELTA_METERS 10.0
 
 @implementation Waypoint
 
@@ -17,5 +18,18 @@
 {
 	coordinate = inCoord;
 	return self;
+}
+
+-(bool) isTooCloseToo:(Waypoint *)waypoint
+{
+    CLLocation *myLocation = [[CLLocation alloc] initWithLatitude:self.coordinate.latitude longitude:self.coordinate.longitude];
+    CLLocation *otherLocation = [[CLLocation alloc] initWithLatitude:waypoint.coordinate.latitude longitude:waypoint.coordinate.longitude];
+    
+    CLLocationDistance metersApart = [myLocation distanceFromLocation:otherLocation];
+    
+    return metersApart < MINIMUM_DELTA_METERS;
+    
+    [myLocation release];
+    
 }
 @end

@@ -9,9 +9,10 @@
 #import "Tour.h"
 #import "TourDetails.h"
 #import "TourRoute.h"
+#import "WaypointList.h"
 
 @implementation Tour
-@synthesize details, isNew, route;
+@synthesize details, isNew, route, waypoints;
 
 -(Tour*) initNew {
 	self = [super init];
@@ -20,9 +21,15 @@
 		self.details = [[TourDetails alloc] init];
 		self.isNew = YES;
         self.route = [[TourRoute alloc] init];
+        self.waypoints = [[WaypointList alloc] init];
 	}
 	
 	return self;
+}
+
+-(bool) addWaypoint:(id)newWaypoint
+{
+    return [waypoints add: newWaypoint];
 }
 
 -(bool) addRouteLocation:(CLLocation *)newLocation

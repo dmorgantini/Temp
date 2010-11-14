@@ -11,19 +11,23 @@
 
 @class TourDetails;
 @class TourRoute;
+@class WaypointList;
+@class Waypoint;
 
 @interface Tour : NSObject {
 	TourDetails* details;
 	bool isNew;
     TourRoute* route;
+    WaypointList* waypoints;
 }
 
 -(Tour*) initNew;
 -(bool) addRouteLocation: (CLLocation *) newLocation;
--(bool) addWaypoint: (CLLocation *) newLocation;
+-(bool) addWaypoint: (Waypoint *) newWaypoint;
 
 @property (nonatomic, retain) TourDetails* details;
 @property (nonatomic) bool isNew;
 @property (nonatomic, retain) TourRoute* route;
+@property (nonatomic, retain) WaypointList* waypoints;
 
 @end
