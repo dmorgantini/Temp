@@ -23,7 +23,9 @@
 
 -(Tour*) initNew;
 -(bool) addRouteLocation: (CLLocation *) newLocation;
--(bool) addWaypoint: (Waypoint *) newWaypoint;
+-(void) addWaypoint: (Waypoint *) newWaypoint;
+-(bool) testWaypoint: (Waypoint *) newWaypoint;
+
 -(NSMutableArray*) getAllWaypoints;
 
 @property (nonatomic, retain) TourDetails* details;

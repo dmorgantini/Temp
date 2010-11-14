@@ -27,9 +27,14 @@
 	return self;
 }
 
--(bool) addWaypoint:(id)newWaypoint
+-(void) addWaypoint:(Waypoint*) newWaypoint
 {
     return [waypointList add: newWaypoint];
+}
+
+-(bool) testWaypoint:(Waypoint *)newWaypoint
+{
+    return [waypointList testWaypoint: newWaypoint];
 }
 
 -(bool) addRouteLocation:(CLLocation *)newLocation

@@ -20,7 +20,7 @@
     return self;
 }
 
--(bool) add:(Waypoint *)waypoint
+-(bool) testWaypoint:(Waypoint *)waypoint
 {
     
     Waypoint *item;
@@ -31,9 +31,13 @@
         
     }
     
-    [waypoints addObject:waypoint];
     return YES;
 }
+-(void) add:(Waypoint *)waypoint
+{
+    [waypoints addObject:waypoint];
+}
+
 
 - (void)dealloc {
     waypoints = nil;

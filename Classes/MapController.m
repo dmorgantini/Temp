@@ -25,13 +25,13 @@ typedef enum {
 -(void) initToolbar: recordActionButton;
 -(void) initToolbar: recordActionButton andShow: (Toolbars) toolbar;
 -(void) updateAnnotations;
--(NSString*) getWaypointTitle;
 @end
 
 @implementation MapController
 
 @synthesize locationManager, mapView, tour, startRecordButton, stopRecordButton, dropWaypointButton, toolbar,
-saveTourButton, nextToobarButton, previousToobarButton, currentButton, mapAnnotations, waypointTitleView, waypointTitleText;
+saveTourButton, nextToobarButton, previousToobarButton, currentButton, mapAnnotations, waypointTitleView, waypointTitleText,
+currentWaypoint;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -170,28 +170,29 @@ saveTourButton, nextToobarButton, previousToobarButton, currentButton, mapAnnota
 
 -(void) dropWaypoint:(id)sender
 {
-    Waypoint *newWaypoint = [[Waypoint alloc] initWithCoordinate:self.locationManager.location.coordinate];
     
-    [newWaypoint setTitle: [self getWaypointTitle]];
+    // memory leak here???
+    self.currentWaypoint = [[Waypoint alloc] initWithCoordinate:self.locationManager.location.coordinate];
     
-    bool addedSuccessfully = [self.tour addWaypoint: newWaypoint];
+    bool canBeAdded = [self.tour testWaypoint: self.currentWaypoint];
     
-    if (addedSuccessfully)
-        [self updateAnnotations];
+    if (canBeAdded)
+    {
+        [mapView addSubview:waypointTitleView];
+        waypointTitleText.text = @"";
+        [waypointTitleText becomeFirstResponder];
+    }
     else
         [Alert showAlert: @"Waypoint too close" withMessage: @"Unable to add waypoint, ensure that you have moved some distance (10m) from the previous waypoint"];
-    
-    
-    [newWaypoint release];
-    
 }
 
--(NSString*)getWaypointTitle
+-(void) endDropWaypoint : (id) sender
 {
-    
-    [mapView addSubview:waypointTitleView];
-    [waypointTitleText becomeFirstResponder];
-    return @"New Waypoint";
+    // do a validation here.
+    [waypointTitleView removeFromSuperview];
+    [self.currentWaypoint setTitle: waypointTitleText.text];
+    [self.tour addWaypoint:self.currentWaypoint];
+    [self updateAnnotations];
 }
 
 -(void) saveTour: (id) sender
@@ -323,6 +324,8 @@ saveTourButton, nextToobarButton, previousToobarButton, currentButton, mapAnnota
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+    
+    self.waypointTitleView = nil;
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -331,6 +334,8 @@ saveTourButton, nextToobarButton, previousToobarButton, currentButton, mapAnnota
 - (void)dealloc {
     [crumbs release];
     [crumbView release];
+    [currentWaypoint release];
+    [waypointTitleView release];
     
     // TODO: release a bunch of stuff here!!!
     

@@ -12,6 +12,7 @@
 
 #import "CrumbPath.h"
 #import "CrumbPathView.h"
+@class Waypoint;
 
 @interface MapController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
     CLLocationManager *locationManager;
@@ -30,6 +31,7 @@
     NSMutableArray *mapAnnotations;
     UIView *waypointTitleView;
     UITextField *waypointTitleText;
+    Waypoint* currentWaypoint;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
@@ -44,9 +46,11 @@
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UIView *waypointTitleView;
 @property (nonatomic, retain) IBOutlet UITextField *waypointTitleText;
-
+@property (nonatomic, retain) Waypoint* currentWaypoint;
 @property (nonatomic, retain) NSMutableArray *mapAnnotations;
 
+
+-(IBAction) endDropWaypoint:(id) sender;
 
 -(void) startRecording:(id) sender;
 -(void) stopRecording:(id) sender;
