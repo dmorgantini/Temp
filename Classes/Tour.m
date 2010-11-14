@@ -20,7 +20,6 @@
 		self.details = [[TourDetails alloc] init];
 		self.isNew = YES;
         self.route = [[TourRoute alloc] init];
-        
 	}
 	
 	return self;

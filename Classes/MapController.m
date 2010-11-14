@@ -8,15 +8,27 @@
 
 #import "MapController.h"
 #import "Tour.h"
+#import "Waypoint.h"
+
+typedef enum {
+    recordingToolbar,
+    editorControlsToolbar,
+    playbackToolbar
+
+} Toolbars;
+
+@interface MapController()
+@property (nonatomic, retain) UIBarButtonItem *currentButton;
+-(BOOL) isCoordinate:(CLLocationCoordinate2D) first equalTo: (CLLocationCoordinate2D) second;
+-(void) initToolbarButtons;
+-(void) initToolbar: recordActionButton;
+-(void) initToolbar: recordActionButton andShow: (Toolbars) toolbar;
+@end
 
 @implementation MapController
 
-@synthesize locationManager, mapView, tour, startRecordButton, stopRecordButton, toolbar;
-
--(BOOL) isCoordinate:(CLLocationCoordinate2D) first equalTo: (CLLocationCoordinate2D) second
-{
-    return ((first.latitude == second.latitude) && (first.longitude == second.longitude));
-}
+@synthesize locationManager, mapView, tour, startRecordButton, stopRecordButton, dropWaypointButton, toolbar,
+saveTourButton, nextToobarButton, previousToobarButton, currentButton;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -24,25 +36,13 @@
     
     self.locationManager = [[[CLLocationManager alloc] init] autorelease];
     self.locationManager.delegate = self; // Tells the location manager to send updates to this object
-        
+    
     // TODO: Should this be configurable?
     
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     
-    
-    startRecordButton = [[UIBarButtonItem alloc] initWithTitle:@"Record" 
-                                                  style:UIBarButtonItemStyleBordered 
-                                                  target:self 
-                                                  action:@selector(startRecording:)];
-
-    stopRecordButton = [[UIBarButtonItem alloc] initWithTitle:@"Stop" 
-                                                         style:UIBarButtonItemStyleBordered 
-                                                        target:self 
-                                                        action:@selector(stopRecording:)];
-    
-    
-    
-    [self initToolbar:startRecordButton];
+    // init toolbar
+    [self initToolbarButtons];
     
 }
 
@@ -54,7 +54,7 @@
     {
         return;
     }
-     
+    
     bool addedToMap = [self.tour addRouteLocation: newLocation];
     
     if (!addedToMap)
@@ -69,7 +69,7 @@
         
         crumbs = [[CrumbPath alloc] initWithCenterCoordinate:newLocation.coordinate];
         [mapView addOverlay:crumbs];
-            
+        
         // On the first location update only, zoom map to user location
         MKCoordinateRegion region = 
         MKCoordinateRegionMakeWithDistance(newLocation.coordinate, 2000, 2000);
@@ -87,12 +87,6 @@
         // so you may experience spikes in location data (in small time intervals)
         // due to 3G tower triangulation.
         // 
-        
-        // perhaps check for some sort of accuracy/timestamp as well
-        
-
-        
-        
         MKMapRect updateRect = [crumbs addCoordinate:newLocation.coordinate];
         
         if (!MKMapRectIsNull(updateRect))
@@ -114,19 +108,74 @@
 
 -(void) initToolbar: (id) recordActionButton
 {
-    [toolbar setItems:[NSArray arrayWithObject:recordActionButton]];
+    [self initToolbar:recordActionButton andShow:recordingToolbar];
+    
+}
+
+-(void) initToolbar: (id) recordActionButton andShow:(Toolbars)thisToolbar
+{
+    self.currentButton = recordActionButton;
+    
+    UIBarButtonItem *flexibleSpace =
+    [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    
+    switch (thisToolbar)
+    {
+        case recordingToolbar:
+            [toolbar setItems:[NSArray arrayWithObjects:recordActionButton, dropWaypointButton, 
+                               flexibleSpace, nextToobarButton, nil]];
+            break;
+        case editorControlsToolbar:
+            [toolbar setItems:[NSArray arrayWithObjects:previousToobarButton, saveTourButton, nil]];
+            break;
+        case playbackToolbar:
+            [toolbar setItems:[NSArray arrayWithObjects:nil]];
+            break;
+    }
+    
+    [flexibleSpace release];
 }
 
 -(void) startRecording :(id) sender
 {
     [self initToolbar:stopRecordButton];
     [locationManager startUpdatingLocation];
+    self.dropWaypointButton.enabled = YES;
 }
 
 -(void) stopRecording :(id) sender
 {
     [self initToolbar:startRecordButton];
     [locationManager stopUpdatingLocation];
+    self.dropWaypointButton.enabled = NO;
+}
+
+-(void) dropWaypoint:(id)sender
+{
+    Waypoint *newWaypoint = [[Waypoint alloc] initWithCoordinate:self.locationManager.location.coordinate];
+    
+    bool shouldAddWaypoint = [self.tour addWaypoint: newWaypoint];
+    
+    if (shouldAddWaypoint)
+        [self.mapView addAnnotation: newWaypoint];
+    
+    [newWaypoint release];
+    
+}
+
+-(void) saveTour: (id) sender
+{
+    NSLog(@"Save tour!!");
+}
+
+-(void) nextToolbar:(id)sender
+{
+    [self initToolbar:currentButton andShow:editorControlsToolbar];
+}
+
+-(void) previousToolbar:(id)sender 
+{
+    [self initToolbar:currentButton andShow:recordingToolbar];
 }
 
 - (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
@@ -136,6 +185,52 @@
         crumbView = [[CrumbPathView alloc] initWithOverlay:overlay];
     }
     return crumbView;
+}
+
+
+-(BOOL) isCoordinate:(CLLocationCoordinate2D) first equalTo: (CLLocationCoordinate2D) second
+{
+    return ((first.latitude == second.latitude) && (first.longitude == second.longitude));
+}
+
+-(void) initToolbarButtons
+{
+    self.dropWaypointButton = [[UIBarButtonItem alloc]   initWithTitle:@"Waypoint"
+                                                                 style:UIBarButtonItemStyleBordered 
+                                                                target:self 
+                                                                action:@selector(dropWaypoint:)];
+    
+    self.dropWaypointButton.enabled = NO;
+    
+    self.startRecordButton = [[UIBarButtonItem alloc] initWithTitle:@"Record" 
+                                                              style:UIBarButtonItemStyleBordered 
+                                                             target:self 
+                                                             action:@selector(startRecording:)];
+    
+    self.stopRecordButton = [[UIBarButtonItem alloc] initWithTitle:@"Stop" 
+                                                             style:UIBarButtonItemStyleBordered 
+                                                            target:self 
+                                                            action:@selector(stopRecording:)];
+    self.stopRecordButton.possibleTitles = [NSSet setWithObjects:@"Record", @"Stop", nil]; // make it the same size as record
+    
+    self.saveTourButton = [[UIBarButtonItem alloc] initWithTitle:@"Save Tour" 
+                                                           style:UIBarButtonItemStyleBordered 
+                                                          target:self 
+                                                          action:@selector(saveTour:)];
+    
+    
+    self.nextToobarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" 
+                                                             style:UIBarButtonItemStyleBordered 
+                                                            target:self 
+                                                            action:@selector(nextToolbar:)];
+    
+    self.previousToobarButton = [[UIBarButtonItem alloc] initWithTitle:@"Prev" 
+                                                                 style:UIBarButtonItemStyleBordered 
+                                                                target:self 
+                                                                action:@selector(previousToolbar:)];
+    
+    [self initToolbar:startRecordButton];
+    
 }
 
 
@@ -156,6 +251,8 @@
 - (void)dealloc {
     [crumbs release];
     [crumbView release];
+    
+    // TODO: release a bunch of stuff here!!!
     
     [super dealloc];
 }

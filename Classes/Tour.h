@@ -20,7 +20,7 @@
 
 -(Tour*) initNew;
 -(bool) addRouteLocation: (CLLocation *) newLocation;
-
+-(bool) addWaypoint: (CLLocation *) newLocation;
 
 @property (nonatomic, retain) TourDetails* details;
 @property (nonatomic) bool isNew;

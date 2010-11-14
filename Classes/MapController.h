@@ -21,7 +21,12 @@
     CrumbPathView *crumbView;
     UIBarButtonItem *startRecordButton;
     UIBarButtonItem *stopRecordButton;
+    UIBarButtonItem *dropWaypointButton;
+    UIBarButtonItem *saveTourButton;
+    UIBarButtonItem *nextToolbarButton;
+    UIBarButtonItem *previousToolbarButton;
     UIToolbar *toolbar;
+    UIBarButtonItem *currentButton;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
@@ -29,11 +34,20 @@
 @property (nonatomic, retain) Tour *tour;
 @property (nonatomic, retain) UIBarButtonItem *startRecordButton;
 @property (nonatomic, retain) UIBarButtonItem *stopRecordButton;
+@property (nonatomic, retain) UIBarButtonItem *dropWaypointButton;
+@property (nonatomic, retain) UIBarButtonItem *saveTourButton;
+@property (nonatomic, retain) UIBarButtonItem *nextToobarButton;
+@property (nonatomic, retain) UIBarButtonItem *previousToobarButton;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 
 
 -(void) startRecording:(id) sender;
 -(void) stopRecording:(id) sender;
--(void) initToolbar: recordActionButton;
+-(void) dropWaypoint:(id)sender;
+-(void) saveTour: (id) sender;
+
+-(void) nextToolbar: (id) sender;
+-(void) previousToolbar: (id) sender;
+
 
 @end
