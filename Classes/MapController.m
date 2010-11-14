@@ -24,12 +24,14 @@ typedef enum {
 -(void) initToolbarButtons;
 -(void) initToolbar: recordActionButton;
 -(void) initToolbar: recordActionButton andShow: (Toolbars) toolbar;
+-(void) updateAnnotations;
+-(NSString*) getWaypointTitle;
 @end
 
 @implementation MapController
 
 @synthesize locationManager, mapView, tour, startRecordButton, stopRecordButton, dropWaypointButton, toolbar,
-saveTourButton, nextToobarButton, previousToobarButton, currentButton;
+saveTourButton, nextToobarButton, previousToobarButton, currentButton, mapAnnotations, waypointTitleView, waypointTitleText;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -107,6 +109,21 @@ saveTourButton, nextToobarButton, previousToobarButton, currentButton;
     
 }
 
+-(void) updateAnnotations
+{
+    [self.mapAnnotations release]; // This does not need to be a instance variable.  Only used here?
+    self.mapAnnotations = [[NSMutableArray alloc] init];
+    
+    for (Waypoint* item in [tour getAllWaypoints]) // check if they are visible?
+    {
+        [self.mapAnnotations addObject:item];
+    }
+    
+    [self.mapView removeAnnotations:self.mapView.annotations];  // remove any annotations that exist
+    
+    [self.mapView addAnnotations:self.mapAnnotations];
+}
+
 -(void) initToolbar: (id) recordActionButton
 {
     [self initToolbar:recordActionButton andShow:recordingToolbar];
@@ -155,16 +172,26 @@ saveTourButton, nextToobarButton, previousToobarButton, currentButton;
 {
     Waypoint *newWaypoint = [[Waypoint alloc] initWithCoordinate:self.locationManager.location.coordinate];
     
-    bool shouldAddWaypoint = [self.tour addWaypoint: newWaypoint];
+    [newWaypoint setTitle: [self getWaypointTitle]];
     
-    if (shouldAddWaypoint)
-        [self.mapView addAnnotation: newWaypoint];
+    bool addedSuccessfully = [self.tour addWaypoint: newWaypoint];
+    
+    if (addedSuccessfully)
+        [self updateAnnotations];
     else
         [Alert showAlert: @"Waypoint too close" withMessage: @"Unable to add waypoint, ensure that you have moved some distance (10m) from the previous waypoint"];
     
     
     [newWaypoint release];
     
+}
+
+-(NSString*)getWaypointTitle
+{
+    
+    [mapView addSubview:waypointTitleView];
+    [waypointTitleText becomeFirstResponder];
+    return @"New Waypoint";
 }
 
 -(void) saveTour: (id) sender
@@ -189,6 +216,55 @@ saveTourButton, nextToobarButton, previousToobarButton, currentButton;
         crumbView = [[CrumbPathView alloc] initWithOverlay:overlay];
     }
     return crumbView;
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)theMapView viewForAnnotation:(id <MKAnnotation>)annotation
+{
+    // if it's the user location, just return nil.
+    if ([annotation isKindOfClass:[MKUserLocation class]])
+        return nil;
+ 
+    if ([annotation isKindOfClass:[Waypoint class]])
+    {
+        // try to dequeue an existing pin view first
+        static NSString* waypointAnnotationIdentifier = @"waypointAnnotationIdentifier";
+        MKPinAnnotationView* pinView = (MKPinAnnotationView *)
+        [mapView dequeueReusableAnnotationViewWithIdentifier:waypointAnnotationIdentifier];
+        if (!pinView)
+        {
+            // if an existing pin view was not available, create one
+            MKPinAnnotationView* customPinView = [[[MKPinAnnotationView alloc]
+                                                   initWithAnnotation:annotation reuseIdentifier:waypointAnnotationIdentifier] autorelease];
+            customPinView.pinColor = MKPinAnnotationColorPurple;
+            customPinView.animatesDrop = YES;
+            customPinView.canShowCallout = YES;
+            
+            // add a detail disclosure button to the callout which will open a new view controller page
+            //
+            // note: you can assign a specific call out accessory view, or as MKMapViewDelegate you can implement:
+            //  - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control;
+            //
+            UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            [rightButton addTarget:self
+                            action:@selector(showDetails:)
+                  forControlEvents:UIControlEventTouchUpInside];
+            customPinView.rightCalloutAccessoryView = rightButton;
+            
+            return customPinView;
+        }
+        else
+        {
+            pinView.annotation = annotation;
+        }
+        return pinView;
+    }
+    else // currently only have one type of annotation (maybe add more? start. stop. etc
+        return nil;
+}
+
+-(void) showDetails:(id)sender
+{
+    NSLog(@"Waypoint details!!!");
 }
 
 

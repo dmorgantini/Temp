@@ -27,6 +27,9 @@
     UIBarButtonItem *previousToolbarButton;
     UIToolbar *toolbar;
     UIBarButtonItem *currentButton;
+    NSMutableArray *mapAnnotations;
+    UIView *waypointTitleView;
+    UITextField *waypointTitleText;
 }
 
 @property (nonatomic, retain) IBOutlet MKMapView *mapView;
@@ -39,6 +42,10 @@
 @property (nonatomic, retain) UIBarButtonItem *nextToobarButton;
 @property (nonatomic, retain) UIBarButtonItem *previousToobarButton;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
+@property (nonatomic, retain) IBOutlet UIView *waypointTitleView;
+@property (nonatomic, retain) IBOutlet UITextField *waypointTitleText;
+
+@property (nonatomic, retain) NSMutableArray *mapAnnotations;
 
 
 -(void) startRecording:(id) sender;

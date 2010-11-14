@@ -9,10 +9,6 @@
 #import "WaypointList.h"
 #import "Waypoint.h"
 
-@interface WaypointList()
-@property (nonatomic, retain) NSMutableArray* waypoints;
-
-@end
 
 @implementation WaypointList
 
@@ -38,7 +34,6 @@
     [waypoints addObject:waypoint];
     return YES;
 }
-
 
 - (void)dealloc {
     waypoints = nil;

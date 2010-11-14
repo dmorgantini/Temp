@@ -10,9 +10,12 @@
 #import <MapKit/MapKit.h>
 
 @interface Waypoint : NSObject <MKAnnotation>{
-
+    NSString* title;
 }
 
+@property (nonatomic, retain) NSString* title;
+
 -(bool) isTooCloseToo: (Waypoint*) waypoint;
+
 
 @end

@@ -18,16 +18,17 @@
 	TourDetails* details;
 	bool isNew;
     TourRoute* route;
-    WaypointList* waypoints;
+    WaypointList* waypointList;
 }
 
 -(Tour*) initNew;
 -(bool) addRouteLocation: (CLLocation *) newLocation;
 -(bool) addWaypoint: (Waypoint *) newWaypoint;
+-(NSMutableArray*) getAllWaypoints;
 
 @property (nonatomic, retain) TourDetails* details;
 @property (nonatomic) bool isNew;
 @property (nonatomic, retain) TourRoute* route;
-@property (nonatomic, retain) WaypointList* waypoints;
+@property (nonatomic, retain) WaypointList* waypointList;
 
 @end

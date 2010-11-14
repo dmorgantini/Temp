@@ -12,7 +12,7 @@
 #import "WaypointList.h"
 
 @implementation Tour
-@synthesize details, isNew, route, waypoints;
+@synthesize details, isNew, route, waypointList;
 
 -(Tour*) initNew {
 	self = [super init];
@@ -21,7 +21,7 @@
 		self.details = [[TourDetails alloc] init];
 		self.isNew = YES;
         self.route = [[TourRoute alloc] init];
-        self.waypoints = [[WaypointList alloc] init];
+        self.waypointList = [[WaypointList alloc] init];
 	}
 	
 	return self;
@@ -29,7 +29,7 @@
 
 -(bool) addWaypoint:(id)newWaypoint
 {
-    return [waypoints add: newWaypoint];
+    return [waypointList add: newWaypoint];
 }
 
 -(bool) addRouteLocation:(CLLocation *)newLocation
@@ -48,6 +48,11 @@
     
     return YES;
     
+}
+
+-(NSMutableArray*) getAllWaypoints
+{
+    return waypointList.waypoints;
 }
 
 -(void) dealloc {

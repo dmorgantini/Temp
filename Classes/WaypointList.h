@@ -14,6 +14,8 @@
     NSMutableArray* waypoints;
 }
 
+
+@property (nonatomic, retain) NSMutableArray* waypoints;
 -(bool) add: (Waypoint*) waypoint;
 
 

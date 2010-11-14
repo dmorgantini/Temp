@@ -12,7 +12,7 @@
 
 @implementation Waypoint
 
-@synthesize coordinate;
+@synthesize coordinate, title;
 
 -initWithCoordinate:(CLLocationCoordinate2D)inCoord
 {
