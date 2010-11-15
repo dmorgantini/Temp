@@ -38,6 +38,12 @@
     [waypoints addObject:waypoint];
 }
 
+-(Waypoint*) getWaypointAtIndex: (int) index
+{
+    return (Waypoint*)[waypoints objectAtIndex:index];
+    
+}
+
 
 - (void)dealloc {
     waypoints = nil;

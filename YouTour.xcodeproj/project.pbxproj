@@ -23,6 +23,7 @@
 		D6100FFC1288FC0C0039B1B8 /* CrumbPathView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6100FFB1288FC0C0039B1B8 /* CrumbPathView.m */; };
 		D611AFBC127E7A220005FB6A /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = D611AFBA127E7A220005FB6A /* MapController.m */; };
 		D611AFBD127E7A220005FB6A /* MapController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D611AFBB127E7A220005FB6A /* MapController.xib */; };
+		D643D7411290F41F0081538F /* WaypointController.m in Sources */ = {isa = PBXBuildFile; fileRef = D643D7401290F41F0081538F /* WaypointController.m */; };
 		D680AACB12907FB800941EB1 /* Waypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = D680AACA12907FB800941EB1 /* Waypoint.m */; };
 		D680AACE1290834E00941EB1 /* WaypointList.m in Sources */ = {isa = PBXBuildFile; fileRef = D680AACD1290834E00941EB1 /* WaypointList.m */; };
 		D686AE8C127F3CD800B5B42B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D686AE8B127F3CD800B5B42B /* MapKit.framework */; };
@@ -60,6 +61,8 @@
 		D611AFB9127E7A220005FB6A /* MapController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapController.h; sourceTree = "<group>"; };
 		D611AFBA127E7A220005FB6A /* MapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
 		D611AFBB127E7A220005FB6A /* MapController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapController.xib; path = Classes/MapController.xib; sourceTree = "<group>"; };
+		D643D73D1290F3FB0081538F /* WaypointController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaypointController.h; sourceTree = "<group>"; };
+		D643D7401290F41F0081538F /* WaypointController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaypointController.m; sourceTree = "<group>"; };
 		D680AAC912907FB800941EB1 /* Waypoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waypoint.h; sourceTree = "<group>"; };
 		D680AACA12907FB800941EB1 /* Waypoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Waypoint.m; sourceTree = "<group>"; };
 		D680AACC1290834E00941EB1 /* WaypointList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaypointList.h; sourceTree = "<group>"; };
@@ -196,6 +199,8 @@
 		D6BE9B49127A165600AEBDD1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D643D73D1290F3FB0081538F /* WaypointController.h */,
+				D643D7401290F41F0081538F /* WaypointController.m */,
 				D611AFB9127E7A220005FB6A /* MapController.h */,
 				D611AFBA127E7A220005FB6A /* MapController.m */,
 				28D7ACF60DDB3853001CB0EB /* RootController.h */,
@@ -283,6 +288,7 @@
 				D6100FFC1288FC0C0039B1B8 /* CrumbPathView.m in Sources */,
 				D680AACB12907FB800941EB1 /* Waypoint.m in Sources */,
 				D680AACE1290834E00941EB1 /* WaypointList.m in Sources */,
+				D643D7411290F41F0081538F /* WaypointController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

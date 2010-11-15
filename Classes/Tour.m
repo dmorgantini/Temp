@@ -39,7 +39,7 @@
 
 -(bool) addRouteLocation:(CLLocation *)newLocation
 {
-
+#if !(TARGET_IPHONE_SIMULATOR)
     if (newLocation.horizontalAccuracy >= 20)
     {
         NSLog(@"Rejecting horizontal accuracy of: %f", newLocation.horizontalAccuracy);
@@ -53,6 +53,7 @@
         NSLog(@"Rejecting location because it was updated %f seconds ago", timeInterval);
         return NO;
     }
+#endif
     
     [self.route addLocation: newLocation];
     
@@ -63,6 +64,12 @@
 -(NSMutableArray*) getAllWaypoints
 {
     return waypointList.waypoints;
+}
+
+-(Waypoint *) getWaypointAtIndex: (int) index
+{
+    return [waypointList getWaypointAtIndex: index];
+    
 }
 
 -(void) dealloc {

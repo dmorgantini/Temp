@@ -10,6 +10,7 @@
 #import "Tour.h"
 #import "Waypoint.h"
 #import "Alert.h"
+#import "WaypointController.h"
 
 typedef enum {
     recordingToolbar,
@@ -31,7 +32,7 @@ typedef enum {
 
 @synthesize locationManager, mapView, tour, startRecordButton, stopRecordButton, dropWaypointButton, toolbar,
 saveTourButton, nextToobarButton, previousToobarButton, currentButton, mapAnnotations, waypointTitleView, waypointTitleText,
-currentWaypoint;
+currentWaypoint, viewAllWaypointsButton;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -42,7 +43,7 @@ currentWaypoint;
     
     // TODO: Should this be configurable?
     
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     
     // init toolbar
     [self initToolbarButtons];
@@ -140,7 +141,7 @@ currentWaypoint;
     switch (thisToolbar)
     {
         case recordingToolbar:
-            [toolbar setItems:[NSArray arrayWithObjects:recordActionButton, dropWaypointButton, 
+            [toolbar setItems:[NSArray arrayWithObjects:recordActionButton, dropWaypointButton, viewAllWaypointsButton,
                                flexibleSpace, nextToobarButton, nil]];
             break;
         case editorControlsToolbar:
@@ -184,6 +185,23 @@ currentWaypoint;
     }
     else
         [Alert showAlert: @"Waypoint too close" withMessage: @"Unable to add waypoint, ensure that you have moved some distance (10m) from the previous waypoint"];
+}
+
+- (void)waypointControllerDidFinish:(WaypointController *)controller
+{
+     [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void) viewAllWaypoints:(id)sender
+{
+    WaypointController *controller = [[WaypointController alloc] init];
+    controller.delegate = self;
+    controller.tour = self.tour;
+    
+    controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentModalViewController:controller animated:YES];
+    
+    [controller release];
 }
 
 -(void) endDropWaypoint : (id) sender
@@ -299,13 +317,18 @@ currentWaypoint;
                                                           target:self 
                                                           action:@selector(saveTour:)];
     
+    self.viewAllWaypointsButton = [[UIBarButtonItem alloc] initWithTitle:@"View Waypoints" 
+                                                           style:UIBarButtonItemStyleBordered 
+                                                           target:self 
+                                                                  action:@selector(viewAllWaypoints:)];
     
-    self.nextToobarButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" 
+    
+    self.nextToobarButton = [[UIBarButtonItem alloc] initWithTitle:@">" 
                                                              style:UIBarButtonItemStyleBordered 
                                                             target:self 
                                                             action:@selector(nextToolbar:)];
     
-    self.previousToobarButton = [[UIBarButtonItem alloc] initWithTitle:@"Prev" 
+    self.previousToobarButton = [[UIBarButtonItem alloc] initWithTitle:@"<" 
                                                                  style:UIBarButtonItemStyleBordered 
                                                                 target:self 
                                                                 action:@selector(previousToolbar:)];

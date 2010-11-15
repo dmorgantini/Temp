@@ -8,13 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
-@class Tour;
-
+#import "WaypointController.h"
 #import "CrumbPath.h"
 #import "CrumbPathView.h"
-@class Waypoint;
 
-@interface MapController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
+@class Waypoint;
+@class Tour;
+
+@interface MapController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, WaypointControllerDelegate> {
     CLLocationManager *locationManager;
     MKMapView *mapView;
     Tour *tour;
@@ -26,6 +27,7 @@
     UIBarButtonItem *saveTourButton;
     UIBarButtonItem *nextToolbarButton;
     UIBarButtonItem *previousToolbarButton;
+    UIBarButtonItem *viewAllWaypointsButton;
     UIToolbar *toolbar;
     UIBarButtonItem *currentButton;
     NSMutableArray *mapAnnotations;
@@ -43,6 +45,7 @@
 @property (nonatomic, retain) UIBarButtonItem *saveTourButton;
 @property (nonatomic, retain) UIBarButtonItem *nextToobarButton;
 @property (nonatomic, retain) UIBarButtonItem *previousToobarButton;
+@property (nonatomic, retain) UIBarButtonItem *viewAllWaypointsButton;
 @property (nonatomic, retain) IBOutlet UIToolbar *toolbar;
 @property (nonatomic, retain) IBOutlet UIView *waypointTitleView;
 @property (nonatomic, retain) IBOutlet UITextField *waypointTitleText;
@@ -56,6 +59,7 @@
 -(void) stopRecording:(id) sender;
 -(void) dropWaypoint:(id)sender;
 -(void) saveTour: (id) sender;
+-(void) viewAllWaypoints: (id) sender;
 
 -(void) nextToolbar: (id) sender;
 -(void) previousToolbar: (id) sender;

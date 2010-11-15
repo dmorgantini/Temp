@@ -18,6 +18,6 @@
 @property (nonatomic, retain) NSMutableArray* waypoints;
 -(void) add: (Waypoint*) waypoint;
 -(bool) testWaypoint: (Waypoint*) waypoint;
-
+-(Waypoint*) getWaypointAtIndex: (int) index;
 
 @end
