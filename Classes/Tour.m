@@ -39,15 +39,20 @@
 
 -(bool) addRouteLocation:(CLLocation *)newLocation
 {
-    // do the analysation of the location right here... accuracy etc
-    if (newLocation.horizontalAccuracy <= 50)
+
+    if (newLocation.horizontalAccuracy >= 20)
+    {
+        NSLog(@"Rejecting horizontal accuracy of: %f", newLocation.horizontalAccuracy);
         return NO;
+    }
     
     NSTimeInterval timeInterval = [newLocation.timestamp timeIntervalSinceNow];
     
     if (timeInterval > 60) // more than 60secs since last update
+    {
+        NSLog(@"Rejecting location because it was updated %f seconds ago", timeInterval);
         return NO;
-    
+    }
     
     [self.route addLocation: newLocation];
     
