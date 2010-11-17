@@ -17,9 +17,11 @@
 
 -(IBAction)createTourClick:(id) sender {
 	
+    
+    
 	YouTourDelegate *delegate = (YouTourDelegate *)[[UIApplication sharedApplication] delegate];
 	
-	TourDetailsController *tourDetails = [[TourDetailsController alloc] init];	
+	TourDetailsController *tourDetails = [[TourDetailsController alloc] initWithNibName:@"TourDetailsController" bundle:nil];	
 	tourDetails.tour = delegate.currentTour;
     [[NSNotificationCenter defaultCenter]
      addObserver:self
@@ -46,7 +48,7 @@
     
     YouTourDelegate *delegate = (YouTourDelegate *)[[UIApplication sharedApplication] delegate];
     
-    MapController *mapController = [[MapController alloc] init];
+    MapController *mapController = [[MapController alloc] initWithNibName:@"MapController" bundle:nil];
     mapController.tour = delegate.currentTour;
     
     [self presentModalViewController:mapController animated:YES];

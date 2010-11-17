@@ -10,7 +10,8 @@
 #import "Tour.h"
 #import "Waypoint.h"
 #import "Alert.h"
-#import "WaypointController.h"
+//#import "WaypointController.h"
+#import "TestController.h"
 
 typedef enum {
     recordingToolbar,
@@ -194,8 +195,8 @@ currentWaypoint, viewAllWaypointsButton;
 
 -(void) viewAllWaypoints:(id)sender
 {
-    WaypointController *controller = [[WaypointController alloc] init];
-    controller.delegate = self;
+    TestController *controller = [[TestController alloc] init];
+    //controller.delegate = self;
     controller.tour = self.tour;
     
     controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
