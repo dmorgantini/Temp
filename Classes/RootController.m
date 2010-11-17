@@ -11,23 +11,15 @@
 #import "Alert.h"
 
 @implementation RootController
-@synthesize createTour;
-@synthesize resumeTour;
-@synthesize searchForTour;
+@synthesize createTour, resumeTour, searchForTour;
 
 -(IBAction)createTourClick:(id) sender {
 	
-    
-    
 	YouTourDelegate *delegate = (YouTourDelegate *)[[UIApplication sharedApplication] delegate];
 	
 	TourDetailsController *tourDetails = [[TourDetailsController alloc] initWithNibName:@"TourDetailsController" bundle:nil];	
 	tourDetails.tour = delegate.currentTour;
-    [[NSNotificationCenter defaultCenter]
-     addObserver:self
-     selector:@selector(doneNewTourDetailsHandler:)
-     name:@"doneEditingTourDetails"
-     object:nil ];
+    tourDetails.delegate = self;
     
     [self presentModalViewController:tourDetails animated:YES];
     
@@ -42,10 +34,9 @@
 	[Alert showAlert: @"Search For Tour" withMessage: @"Do It!!"];	
 }
 
--(void)doneNewTourDetailsHandler: (NSNotification *) notification
+-(void)tourDetailsControllerDidFinish: (TourDetailsController *)controller
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"doneEditingTourDetails" object:nil];
-    
+    [self dismissModalViewControllerAnimated:NO];
     YouTourDelegate *delegate = (YouTourDelegate *)[[UIApplication sharedApplication] delegate];
     
     MapController *mapController = [[MapController alloc] initWithNibName:@"MapController" bundle:nil];
@@ -55,6 +46,7 @@
     
     [mapController release];
 }
+
 
 /*
 // The designated initializer. Override to perform setup that is required before the view is loaded.

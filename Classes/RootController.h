@@ -10,7 +10,7 @@
 #import "TourDetailsController.h"
 #import "MapController.h"
 
-@interface RootController : UIViewController {
+@interface RootController : UIViewController <TourDetailsControllerDelegate> {
 	UIButton *createTour;
 	UIButton *searchForTour;
 	UIButton *resumeTour;

@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 @class Tour;
 
+@protocol TourDetailsControllerDelegate;
+
 @interface TourDetailsController : UIViewController {
+    id <TourDetailsControllerDelegate> delegate;
 	Tour *tour;
 	UINavigationItem *navTitle;
 	UITextField *tourName;
@@ -21,7 +24,14 @@
 @property (nonatomic, retain) IBOutlet UITextField* tourName;
 @property (nonatomic, retain) IBOutlet UITextView* tourDescription;
 
--(IBAction)doneClick:(id)sender;
 -(IBAction)cancelClick:(id)sender;
 
+@property (nonatomic, assign) id <TourDetailsControllerDelegate> delegate;
+- (IBAction)doneClick:(id)sender;
 @end
+
+
+@protocol TourDetailsControllerDelegate   
+- (void)tourDetailsControllerDidFinish:(TourDetailsController *)controller;
+@end
+

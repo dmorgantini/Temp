@@ -15,7 +15,7 @@
 @synthesize tour;
 @synthesize navTitle;
 @synthesize tourName;
-@synthesize tourDescription;
+@synthesize tourDescription, delegate;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -37,19 +37,13 @@
 	if ([tourName.text length] == 0 || [tourDescription.text length] == 0){
         [Alert showAlert: @"Validation Error" withMessage: @"Ensure you have entered both a name and description"];
          return;
-    }
-
-    [self dismissModalViewControllerAnimated:NO];
-    
+    }    
     tour.details.tourName = tourName.text;
     tour.details.tourDetails = tourDescription.text;
     
-    [[NSNotificationCenter defaultCenter]
-     postNotificationName:@"doneEditingTourDetails"
-     object:nil ];
-    
+    [self.delegate tourDetailsControllerDidFinish:self];
 
-    
+    //[self dismissModalViewControllerAnimated:NO];
 }
 
 -(IBAction) cancelClick:(id)sender {
