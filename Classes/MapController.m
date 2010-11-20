@@ -10,8 +10,7 @@
 #import "Tour.h"
 #import "Waypoint.h"
 #import "Alert.h"
-//#import "WaypointController.h"
-#import "TestController.h"
+#import "WaypointController.h"
 
 typedef enum {
     recordingToolbar,
@@ -195,7 +194,7 @@ currentWaypoint, viewAllWaypointsButton;
 
 -(void) viewAllWaypoints:(id)sender
 {
-    TestController *controller = [[TestController alloc] init];
+    WaypointController *controller = [[WaypointController alloc] initWithNibName:@"WaypointController" bundle:nil];
     //controller.delegate = self;
     controller.tour = self.tour;
     

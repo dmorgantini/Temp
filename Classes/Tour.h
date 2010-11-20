@@ -26,7 +26,7 @@
 -(void) addWaypoint: (Waypoint *) newWaypoint;
 -(bool) testWaypoint: (Waypoint *) newWaypoint;
 -(Waypoint *) getWaypointAtIndex: (int) index;
-
+-(int) countWaypoints;
 
 -(NSMutableArray*) getAllWaypoints;
 

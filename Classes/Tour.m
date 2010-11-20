@@ -72,6 +72,11 @@
     
 }
 
+-(int)countWaypoints
+{
+    return [waypointList countWaypoints];
+}
+
 -(void) dealloc {
 	[details release];
     [route release];

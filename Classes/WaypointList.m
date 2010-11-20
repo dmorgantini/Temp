@@ -44,9 +44,14 @@
     
 }
 
+-(int) countWaypoints
+{
+    return [waypoints count];
+}
+
 
 - (void)dealloc {
-    waypoints = nil;
+    [waypoints release];
     [super dealloc];
 }
 

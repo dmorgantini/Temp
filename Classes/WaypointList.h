@@ -19,5 +19,6 @@
 -(void) add: (Waypoint*) waypoint;
 -(bool) testWaypoint: (Waypoint*) waypoint;
 -(Waypoint*) getWaypointAtIndex: (int) index;
+-(int) countWaypoints;
 
 @end

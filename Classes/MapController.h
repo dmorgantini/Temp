@@ -15,7 +15,7 @@
 @class Waypoint;
 @class Tour;
 
-@interface MapController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, WaypointControllerDelegate> {
+@interface MapController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
     CLLocationManager *locationManager;
     MKMapView *mapView;
     Tour *tour;
