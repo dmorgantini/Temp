@@ -15,7 +15,8 @@
 @class Waypoint;
 @class Tour;
 
-@interface MapController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
+@interface MapController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate, ControllerFinishedDelegate>
+{
     CLLocationManager *locationManager;
     MKMapView *mapView;
     Tour *tour;
@@ -30,7 +31,6 @@
     UIBarButtonItem *viewAllWaypointsButton;
     UIToolbar *toolbar;
     UIBarButtonItem *currentButton;
-    NSMutableArray *mapAnnotations;
     UIView *waypointTitleView;
     UITextField *waypointTitleText;
     Waypoint* currentWaypoint;
@@ -50,7 +50,6 @@
 @property (nonatomic, retain) IBOutlet UIView *waypointTitleView;
 @property (nonatomic, retain) IBOutlet UITextField *waypointTitleText;
 @property (nonatomic, retain) Waypoint* currentWaypoint;
-@property (nonatomic, retain) NSMutableArray *mapAnnotations;
 
 
 -(IBAction) endDropWaypoint:(id) sender;

@@ -11,6 +11,7 @@
 #import "Waypoint.h"
 #import "Alert.h"
 #import "WaypointController.h"
+#import "ControllerFinishedDelegate.h"
 
 typedef enum {
     recordingToolbar,
@@ -26,13 +27,13 @@ typedef enum {
 -(void) initToolbar: recordActionButton;
 -(void) initToolbar: recordActionButton andShow: (Toolbars) toolbar;
 -(void) updateAnnotations;
+-(void) addWaypoint:(Waypoint*)waypoint;
 @end
 
 @implementation MapController
 
 @synthesize locationManager, mapView, tour, startRecordButton, stopRecordButton, dropWaypointButton, toolbar,
-saveTourButton, nextToobarButton, previousToobarButton, currentButton, mapAnnotations, waypointTitleView, waypointTitleText,
-currentWaypoint, viewAllWaypointsButton;
+saveTourButton, nextToobarButton, previousToobarButton, currentButton, waypointTitleView, waypointTitleText, currentWaypoint, viewAllWaypointsButton;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -43,7 +44,7 @@ currentWaypoint, viewAllWaypointsButton;
     
     // TODO: Should this be configurable?
     
-    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;
     
     // init toolbar
     [self initToolbarButtons];
@@ -111,18 +112,15 @@ currentWaypoint, viewAllWaypointsButton;
 }
 
 -(void) updateAnnotations
-{
-    [self.mapAnnotations release]; // This does not need to be a instance variable.  Only used here?
-    self.mapAnnotations = [[NSMutableArray alloc] init];
-    
-    for (Waypoint* item in [tour getAllWaypoints]) // check if they are visible?
-    {
-        [self.mapAnnotations addObject:item];
-    }
-    
+{    
     [self.mapView removeAnnotations:self.mapView.annotations];  // remove any annotations that exist
     
-    [self.mapView addAnnotations:self.mapAnnotations];
+    [self.mapView addAnnotations:[tour getAllWaypoints]];
+}
+
+-(void) addWaypoint:(Waypoint *)waypoint
+{
+    [self.mapView addAnnotation:waypoint];
 }
 
 -(void) initToolbar: (id) recordActionButton
@@ -189,13 +187,15 @@ currentWaypoint, viewAllWaypointsButton;
 
 - (void)waypointControllerDidFinish:(WaypointController *)controller
 {
+    
+    [self updateAnnotations];
      [self dismissModalViewControllerAnimated:YES];
 }
 
 -(void) viewAllWaypoints:(id)sender
 {
     WaypointController *controller = [[WaypointController alloc] initWithNibName:@"WaypointController" bundle:nil];
-    //controller.delegate = self;
+    controller.delegate = self;
     controller.tour = self.tour;
     
     controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
@@ -210,7 +210,7 @@ currentWaypoint, viewAllWaypointsButton;
     [waypointTitleView removeFromSuperview];
     [self.currentWaypoint setTitle: waypointTitleText.text];
     [self.tour addWaypoint:self.currentWaypoint];
-    [self updateAnnotations];
+    [self addWaypoint:self.currentWaypoint];
 }
 
 -(void) saveTour: (id) sender
@@ -281,6 +281,14 @@ currentWaypoint, viewAllWaypointsButton;
         return nil;
 }
 
+-(void) controllerDidFinish: (id) sender
+{
+    if ([sender isKindOfClass:[WaypointController class]])
+        [self waypointControllerDidFinish:sender];
+    
+}
+
+
 -(void) showDetails:(id)sender
 {
     NSLog(@"Waypoint details!!!");
@@ -294,6 +302,8 @@ currentWaypoint, viewAllWaypointsButton;
 
 -(void) initToolbarButtons
 {
+    // lazy load?
+    
     self.dropWaypointButton = [[UIBarButtonItem alloc]   initWithTitle:@"Waypoint"
                                                                  style:UIBarButtonItemStyleBordered 
                                                                 target:self 

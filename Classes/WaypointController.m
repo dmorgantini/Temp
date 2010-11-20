@@ -13,9 +13,7 @@
 
 @implementation WaypointController
 
-@synthesize tour, myTableView;
-
-
+@synthesize tour, myTableView, delegate;
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
@@ -23,7 +21,6 @@
     
     [self.myTableView reloadData];
 }
-
 
 #pragma mark -
 #pragma mark UITableViewDataSource
@@ -65,8 +62,10 @@
 }
 
 
-
-
+-(IBAction)doneClick:(id)sender
+{
+    [self.delegate controllerDidFinish:self];
+}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
