@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesStackState>
+   <StackStates>
+      <StackState
+         stackFrameDescription = "-[Tour addRouteLocation:]:Tour.m">
+         <expressions>
+            <expression
+               value = "newLocation.horizontalAccuracy">
+            </expression>
+         </expressions>
+      </StackState>
+      <StackState
+         stackFrameDescription = "-[MapController locationManager:didUpdateToLocation:fromLocation:]:MapController.m">
+         <expressions>
+         </expressions>
+      </StackState>
+   </StackStates>
+</VariablesStackState>

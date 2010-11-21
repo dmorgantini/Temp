@@ -11,6 +11,7 @@
 #import "Waypoint.h"
 #import "Alert.h"
 #import "WaypointController.h"
+#import "WaypointDetailsController.h"
 #import "ControllerFinishedDelegate.h"
 
 typedef enum {
@@ -185,13 +186,6 @@ saveTourButton, nextToobarButton, previousToobarButton, currentButton, waypointT
         [Alert showAlert: @"Waypoint too close" withMessage: @"Unable to add waypoint, ensure that you have moved some distance (10m) from the previous waypoint"];
 }
 
-- (void)waypointControllerDidFinish:(WaypointController *)controller
-{
-    
-    [self updateAnnotations];
-     [self dismissModalViewControllerAnimated:YES];
-}
-
 -(void) viewAllWaypoints:(id)sender
 {
     WaypointController *controller = [[WaypointController alloc] initWithNibName:@"WaypointController" bundle:nil];
@@ -263,10 +257,7 @@ saveTourButton, nextToobarButton, previousToobarButton, currentButton, waypointT
             // note: you can assign a specific call out accessory view, or as MKMapViewDelegate you can implement:
             //  - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control;
             //
-            UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
-            [rightButton addTarget:self
-                            action:@selector(showDetails:)
-                  forControlEvents:UIControlEventTouchUpInside];
+            UIButton* rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];         
             customPinView.rightCalloutAccessoryView = rightButton;
             
             return customPinView;
@@ -281,16 +272,32 @@ saveTourButton, nextToobarButton, previousToobarButton, currentButton, waypointT
         return nil;
 }
 
+-(void) mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
+{
+    WaypointDetailsController *controller = [[WaypointDetailsController alloc] initWithNibName:@"WaypointDetailsController" bundle:nil];
+    controller.delegate = self;
+    controller.waypoint = (Waypoint*)view.annotation;
+    
+    controller.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+    [self presentModalViewController:controller animated:YES];
+    
+    [controller release];
+    
+    
+    
+}
+
 -(void) controllerDidFinish: (id) sender
 {
-    if ([sender isKindOfClass:[WaypointController class]])
-        [self waypointControllerDidFinish:sender];
-    
+    [self updateAnnotations];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 
 -(void) showDetails:(id)sender
 {
+    
+    
     NSLog(@"Waypoint details!!!");
 }
 

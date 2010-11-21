@@ -28,9 +28,12 @@
 		D680AACB12907FB800941EB1 /* Waypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = D680AACA12907FB800941EB1 /* Waypoint.m */; };
 		D680AACE1290834E00941EB1 /* WaypointList.m in Sources */ = {isa = PBXBuildFile; fileRef = D680AACD1290834E00941EB1 /* WaypointList.m */; };
 		D686AE8C127F3CD800B5B42B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D686AE8B127F3CD800B5B42B /* MapKit.framework */; };
+		D6970C6D1299C5E8005E33E8 /* UITextViewInputAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = D6970C6C1299C5E8005E33E8 /* UITextViewInputAccessory.m */; };
 		D6B2EAC9127E1EC100608207 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B2EAC8127E1EC100608207 /* Alert.m */; };
 		D6B348061282674800FA6876 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B348051282674800FA6876 /* CoreLocation.framework */; };
 		D6F21ACC1284F5D000BDE57E /* CrumbPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D6F21ACB1284F5D000BDE57E /* CrumbPath.m */; };
+		D6F89769129872C7005ACC75 /* WaypointDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6F89767129872C7005ACC75 /* WaypointDetailsController.m */; };
+		D6F8976A129872C7005ACC75 /* WaypointDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6F89768129872C7005ACC75 /* WaypointDetailsController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,16 +67,22 @@
 		D61E34A512938D3500E479B6 /* WaypointController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WaypointController.xib; path = Classes/WaypointController.xib; sourceTree = "<group>"; };
 		D6443EFD1297798B0095B8C4 /* WaypointController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaypointController.h; sourceTree = "<group>"; };
 		D6443EFE1297798B0095B8C4 /* WaypointController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaypointController.m; sourceTree = "<group>"; };
+		D661EE34129867CC00AA90F7 /* ControllerFinishedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerFinishedDelegate.h; sourceTree = "<group>"; };
 		D680AAC912907FB800941EB1 /* Waypoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waypoint.h; sourceTree = "<group>"; };
 		D680AACA12907FB800941EB1 /* Waypoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Waypoint.m; sourceTree = "<group>"; };
 		D680AACC1290834E00941EB1 /* WaypointList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaypointList.h; sourceTree = "<group>"; };
 		D680AACD1290834E00941EB1 /* WaypointList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaypointList.m; sourceTree = "<group>"; };
 		D686AE8B127F3CD800B5B42B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		D6970C6B1299C5E8005E33E8 /* UITextViewInputAccessory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextViewInputAccessory.h; sourceTree = "<group>"; };
+		D6970C6C1299C5E8005E33E8 /* UITextViewInputAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextViewInputAccessory.m; sourceTree = "<group>"; };
 		D6B2EAC7127E1EC100608207 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alert.h; sourceTree = "<group>"; };
 		D6B2EAC8127E1EC100608207 /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alert.m; sourceTree = "<group>"; };
 		D6B348051282674800FA6876 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		D6F21ACA1284F5D000BDE57E /* CrumbPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrumbPath.h; sourceTree = "<group>"; };
 		D6F21ACB1284F5D000BDE57E /* CrumbPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrumbPath.m; sourceTree = "<group>"; };
+		D6F89766129872C7005ACC75 /* WaypointDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaypointDetailsController.h; sourceTree = "<group>"; };
+		D6F89767129872C7005ACC75 /* WaypointDetailsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaypointDetailsController.m; sourceTree = "<group>"; };
+		D6F89768129872C7005ACC75 /* WaypointDetailsController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WaypointDetailsController.xib; path = Classes/WaypointDetailsController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +146,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D6F89768129872C7005ACC75 /* WaypointDetailsController.xib */,
 				D61E34A512938D3500E479B6 /* WaypointController.xib */,
 				D6014A7B127A27B300606634 /* TourDetailsController.xib */,
 				D611AFBB127E7A220005FB6A /* MapController.xib */,
@@ -190,6 +200,8 @@
 		D6B2EAC6127E1EA100608207 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D6970C6B1299C5E8005E33E8 /* UITextViewInputAccessory.h */,
+				D6970C6C1299C5E8005E33E8 /* UITextViewInputAccessory.m */,
 				D6B2EAC7127E1EC100608207 /* Alert.h */,
 				D6B2EAC8127E1EC100608207 /* Alert.m */,
 			);
@@ -199,6 +211,9 @@
 		D6BE9B49127A165600AEBDD1 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D6F89766129872C7005ACC75 /* WaypointDetailsController.h */,
+				D6F89767129872C7005ACC75 /* WaypointDetailsController.m */,
+				D661EE34129867CC00AA90F7 /* ControllerFinishedDelegate.h */,
 				D6443EFD1297798B0095B8C4 /* WaypointController.h */,
 				D6443EFE1297798B0095B8C4 /* WaypointController.m */,
 				D611AFB9127E7A220005FB6A /* MapController.h */,
@@ -265,6 +280,7 @@
 				D6014A7D127A27B300606634 /* TourDetailsController.xib in Resources */,
 				D611AFBD127E7A220005FB6A /* MapController.xib in Resources */,
 				D61E34A612938D3500E479B6 /* WaypointController.xib in Resources */,
+				D6F8976A129872C7005ACC75 /* WaypointDetailsController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +305,8 @@
 				D680AACB12907FB800941EB1 /* Waypoint.m in Sources */,
 				D680AACE1290834E00941EB1 /* WaypointList.m in Sources */,
 				D6443EFF1297798B0095B8C4 /* WaypointController.m in Sources */,
+				D6F89769129872C7005ACC75 /* WaypointDetailsController.m in Sources */,
+				D6970C6D1299C5E8005E33E8 /* UITextViewInputAccessory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

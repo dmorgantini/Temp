@@ -11,10 +11,11 @@
 
 @interface Waypoint : NSObject <MKAnnotation>{
     NSString* title;
+    NSString* audioText;
 }
 
 @property (nonatomic, retain) NSString* title;
-
+@property (nonatomic, retain) NSString* audioText;
 -(bool) isTooCloseToo: (Waypoint*) waypoint;
 
 
