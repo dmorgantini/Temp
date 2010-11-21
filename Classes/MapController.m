@@ -181,6 +181,7 @@ saveTourButton, nextToobarButton, previousToobarButton, currentButton, waypointT
         [mapView addSubview:waypointTitleView];
         waypointTitleText.text = @"";
         [waypointTitleText becomeFirstResponder];
+        [waypointTitleText becomeFirstResponder];
     }
     else
         [Alert showAlert: @"Waypoint too close" withMessage: @"Unable to add waypoint, ensure that you have moved some distance (10m) from the previous waypoint"];

@@ -12,13 +12,14 @@
 
 @class Waypoint;
 
-@interface WaypointDetailsController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+@interface WaypointDetailsController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate> {
     IBOutlet UITableView *tableView;
     IBOutlet UITableViewCell *titleCell;
     IBOutlet UITableViewCell *audioCell;
     
     IBOutlet UITextView *audioText;
     IBOutlet UITextField *titleText;
+    IBOutlet UINavigationItem *navTitle;
     
     Waypoint* waypoint;
     
@@ -29,6 +30,7 @@
 @property (nonatomic, retain) UITextView *audioText;
 @property (nonatomic, retain) UITextField *titleText;
 @property (nonatomic, retain) Waypoint* waypoint;
+@property (nonatomic, retain) UINavigationItem *navTitle;
 
 -(IBAction) cancelClick;
 

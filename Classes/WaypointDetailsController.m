@@ -10,7 +10,7 @@
 #import "Waypoint.h"
 @implementation WaypointDetailsController
 
-@synthesize waypoint, titleText, audioText, delegate;
+@synthesize waypoint, titleText, audioText, delegate, navTitle;
 
 NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your audio text here.";
 
@@ -21,7 +21,7 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
     audioCell.selectionStyle = UITableViewCellSelectionStyleNone;
     titleCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    self.title = waypoint.title;
+    self.navTitle.title = waypoint.title;
     titleText.text = waypoint.title;
     
     if (!waypoint.audioText)
@@ -34,6 +34,18 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
     }
 }
 
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:DEFAULT_AUDIO])
+        textView.text = @"";
+    
+}
+
+-(void)textViewDidEndEditing:(UITextView *)textView
+{
+    if ([textView.text isEqualToString:@""])
+        textView.text = DEFAULT_AUDIO;
+}
 
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -68,7 +80,8 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
 -(IBAction) saveWaypoint
 {
     self.waypoint.title = titleText.text;
-    
+    if (![audioText.text isEqualToString:DEFAULT_AUDIO])
+        self.waypoint.audioText = audioText.text;
     
     [self.delegate controllerDidFinish:self];
 }
@@ -90,7 +103,6 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
 -(IBAction) doneAudioText
 {
     [audioText resignFirstResponder];
-    
 }
 
 
