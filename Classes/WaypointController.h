@@ -11,7 +11,7 @@
 @class Tour;
 
 @interface WaypointController : UIViewController<UINavigationBarDelegate, UITableViewDelegate,
-UITableViewDataSource> {
+UITableViewDataSource, ControllerFinishedDelegate> {
     Tour *tour;
     UITableView *myTableView;
     id <ControllerFinishedDelegate> delegate;

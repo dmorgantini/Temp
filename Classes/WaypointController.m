@@ -9,7 +9,7 @@
 #import "WaypointController.h"
 #import "Tour.h"
 #import "Waypoint.h"
-
+#import "WaypointDetailsController.h"
 
 @implementation WaypointController
 
@@ -56,9 +56,28 @@
 #pragma mark -
 #pragma mark UITableViewDelegate
 
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    // TODO: What happens here?
+    
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    WaypointDetailsController *controller = [[WaypointDetailsController alloc] initWithNibName:@"WaypointDetailsController" bundle:nil];
+    controller.delegate = self;
+    controller.waypoint = [self.tour getWaypointAtIndex:indexPath.row];
+    
+    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentModalViewController:controller animated:YES];
+    
+    [controller release];
+}
 
+-(void) controllerDidFinish: (id) sender
+{
+    [self.myTableView reloadData];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 
@@ -76,12 +95,18 @@
 
 - (void)viewDidUnload {
     [super viewDidUnload];
+    
+    self.tour = nil;
+    self.myTableView = nil;
+    self.delegate = nil;
+    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
 
 
 - (void)dealloc {
+    
     [super dealloc];
 }
 
