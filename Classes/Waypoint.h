@@ -12,11 +12,13 @@
 @interface Waypoint : NSObject <MKAnnotation>{
     NSString* title;
     NSString* audioText;
+    NSString* waypointId;
 }
 
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSString* audioText;
+@property (nonatomic, retain) NSString* waypointId;
 -(bool) isTooCloseToo: (Waypoint*) waypoint;
-
+-(void) saveAudioData: (NSData*) data withExtension:(NSString*) ext;
 
 @end

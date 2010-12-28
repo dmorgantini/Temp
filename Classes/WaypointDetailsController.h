@@ -7,12 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 #import "ControllerFinishedDelegate.h"
 
 
 @class Waypoint;
+@class AudioService;
 
-@interface WaypointDetailsController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate> {
+@interface WaypointDetailsController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, AVAudioPlayerDelegate> {
     IBOutlet UITableView *tableView;
     IBOutlet UITableViewCell *titleCell;
     IBOutlet UITableViewCell *audioCell;
@@ -21,7 +23,13 @@
     IBOutlet UITextField *titleText;
     IBOutlet UINavigationItem *navTitle;
     
+    IBOutlet UIBarButtonItem *recordButton;
+    IBOutlet UIBarButtonItem *playButton;
+    
     Waypoint* waypoint;
+    bool isRecording;
+    bool isPlaying;
+    AudioService* audioService;
     
     id <ControllerFinishedDelegate> delegate;
 }
@@ -31,6 +39,9 @@
 @property (nonatomic, retain) UITextField *titleText;
 @property (nonatomic, retain) Waypoint* waypoint;
 @property (nonatomic, retain) UINavigationItem *navTitle;
+@property (nonatomic, retain) UIBarButtonItem *recordButton;
+@property (nonatomic, retain) UIBarButtonItem *playButton;
+@property (nonatomic, retain) AudioService* audioService;
 
 -(IBAction) cancelClick;
 

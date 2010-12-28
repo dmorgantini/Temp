@@ -24,7 +24,10 @@
 		D611AFBC127E7A220005FB6A /* MapController.m in Sources */ = {isa = PBXBuildFile; fileRef = D611AFBA127E7A220005FB6A /* MapController.m */; };
 		D611AFBD127E7A220005FB6A /* MapController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D611AFBB127E7A220005FB6A /* MapController.xib */; };
 		D61E34A612938D3500E479B6 /* WaypointController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D61E34A512938D3500E479B6 /* WaypointController.xib */; };
+		D6433CB8129E1B9C005345F4 /* AudioService.m in Sources */ = {isa = PBXBuildFile; fileRef = D6433CB7129E1B9C005345F4 /* AudioService.m */; };
 		D6443EFF1297798B0095B8C4 /* WaypointController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6443EFE1297798B0095B8C4 /* WaypointController.m */; };
+		D655772D129E289D0060124C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D655772C129E289D0060124C /* AVFoundation.framework */; };
+		D6557733129E298B0060124C /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6557732129E298B0060124C /* AudioToolbox.framework */; };
 		D680AACB12907FB800941EB1 /* Waypoint.m in Sources */ = {isa = PBXBuildFile; fileRef = D680AACA12907FB800941EB1 /* Waypoint.m */; };
 		D680AACE1290834E00941EB1 /* WaypointList.m in Sources */ = {isa = PBXBuildFile; fileRef = D680AACD1290834E00941EB1 /* WaypointList.m */; };
 		D686AE8C127F3CD800B5B42B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D686AE8B127F3CD800B5B42B /* MapKit.framework */; };
@@ -32,6 +35,7 @@
 		D6A8AE621299CBF30067F21D /* UITextFieldAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = D6A8AE611299CBF30067F21D /* UITextFieldAccessoryView.m */; };
 		D6B2EAC9127E1EC100608207 /* Alert.m in Sources */ = {isa = PBXBuildFile; fileRef = D6B2EAC8127E1EC100608207 /* Alert.m */; };
 		D6B348061282674800FA6876 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6B348051282674800FA6876 /* CoreLocation.framework */; };
+		D6E893F212CA876D005CBD2E /* AudioFile.m in Sources */ = {isa = PBXBuildFile; fileRef = D6E893F112CA876D005CBD2E /* AudioFile.m */; };
 		D6F21ACC1284F5D000BDE57E /* CrumbPath.m in Sources */ = {isa = PBXBuildFile; fileRef = D6F21ACB1284F5D000BDE57E /* CrumbPath.m */; };
 		D6F89769129872C7005ACC75 /* WaypointDetailsController.m in Sources */ = {isa = PBXBuildFile; fileRef = D6F89767129872C7005ACC75 /* WaypointDetailsController.m */; };
 		D6F8976A129872C7005ACC75 /* WaypointDetailsController.xib in Resources */ = {isa = PBXBuildFile; fileRef = D6F89768129872C7005ACC75 /* WaypointDetailsController.xib */; };
@@ -66,8 +70,12 @@
 		D611AFBA127E7A220005FB6A /* MapController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapController.m; sourceTree = "<group>"; };
 		D611AFBB127E7A220005FB6A /* MapController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapController.xib; path = Classes/MapController.xib; sourceTree = "<group>"; };
 		D61E34A512938D3500E479B6 /* WaypointController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WaypointController.xib; path = Classes/WaypointController.xib; sourceTree = "<group>"; };
+		D6433CB6129E1B9C005345F4 /* AudioService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioService.h; sourceTree = "<group>"; };
+		D6433CB7129E1B9C005345F4 /* AudioService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioService.m; sourceTree = "<group>"; };
 		D6443EFD1297798B0095B8C4 /* WaypointController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaypointController.h; sourceTree = "<group>"; };
 		D6443EFE1297798B0095B8C4 /* WaypointController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaypointController.m; sourceTree = "<group>"; };
+		D655772C129E289D0060124C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		D6557732129E298B0060124C /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		D661EE34129867CC00AA90F7 /* ControllerFinishedDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ControllerFinishedDelegate.h; sourceTree = "<group>"; };
 		D680AAC912907FB800941EB1 /* Waypoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Waypoint.h; sourceTree = "<group>"; };
 		D680AACA12907FB800941EB1 /* Waypoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Waypoint.m; sourceTree = "<group>"; };
@@ -78,9 +86,12 @@
 		D6970C6C1299C5E8005E33E8 /* UITextViewInputAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextViewInputAccessory.m; sourceTree = "<group>"; };
 		D6A8AE601299CBF30067F21D /* UITextFieldAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldAccessoryView.h; sourceTree = "<group>"; };
 		D6A8AE611299CBF30067F21D /* UITextFieldAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldAccessoryView.m; sourceTree = "<group>"; };
+		D6AC7F0C12B72104007A45E7 /* StringExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringExtensions.h; sourceTree = "<group>"; };
 		D6B2EAC7127E1EC100608207 /* Alert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Alert.h; sourceTree = "<group>"; };
 		D6B2EAC8127E1EC100608207 /* Alert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Alert.m; sourceTree = "<group>"; };
 		D6B348051282674800FA6876 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D6E893F012CA876D005CBD2E /* AudioFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioFile.h; sourceTree = "<group>"; };
+		D6E893F112CA876D005CBD2E /* AudioFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioFile.m; sourceTree = "<group>"; };
 		D6F21ACA1284F5D000BDE57E /* CrumbPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CrumbPath.h; sourceTree = "<group>"; };
 		D6F21ACB1284F5D000BDE57E /* CrumbPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CrumbPath.m; sourceTree = "<group>"; };
 		D6F89766129872C7005ACC75 /* WaypointDetailsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaypointDetailsController.h; sourceTree = "<group>"; };
@@ -98,6 +109,8 @@
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				D686AE8C127F3CD800B5B42B /* MapKit.framework in Frameworks */,
 				D6B348061282674800FA6876 /* CoreLocation.framework in Frameworks */,
+				D655772D129E289D0060124C /* AVFoundation.framework in Frameworks */,
+				D6557733129E298B0060124C /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,7 +120,6 @@
 		080E96DDFE201D6D7F000001 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				D6100FF61288FA570039B1B8 /* Overlay */,
 				D6B2EAC6127E1EA100608207 /* Utilities */,
 				D6014A84127A27D800606634 /* Model */,
 				D6BE9B49127A165600AEBDD1 /* Controllers */,
@@ -163,6 +175,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D6557732129E298B0060124C /* AudioToolbox.framework */,
+				D655772C129E289D0060124C /* AVFoundation.framework */,
 				D6B348051282674800FA6876 /* CoreLocation.framework */,
 				D686AE8B127F3CD800B5B42B /* MapKit.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
@@ -203,10 +217,13 @@
 		D6B2EAC6127E1EA100608207 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				D6D7CE65129CB71A001873B4 /* Audio */,
+				D6100FF61288FA570039B1B8 /* Overlay */,
 				D6A8AE601299CBF30067F21D /* UITextFieldAccessoryView.h */,
 				D6A8AE611299CBF30067F21D /* UITextFieldAccessoryView.m */,
 				D6970C6B1299C5E8005E33E8 /* UITextViewInputAccessory.h */,
 				D6970C6C1299C5E8005E33E8 /* UITextViewInputAccessory.m */,
+				D6AC7F0C12B72104007A45E7 /* StringExtensions.h */,
 				D6B2EAC7127E1EC100608207 /* Alert.h */,
 				D6B2EAC8127E1EC100608207 /* Alert.m */,
 			);
@@ -229,6 +246,17 @@
 				D6014A7A127A27B300606634 /* TourDetailsController.m */,
 			);
 			name = Controllers;
+			sourceTree = "<group>";
+		};
+		D6D7CE65129CB71A001873B4 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				D6433CB6129E1B9C005345F4 /* AudioService.h */,
+				D6433CB7129E1B9C005345F4 /* AudioService.m */,
+				D6E893F012CA876D005CBD2E /* AudioFile.h */,
+				D6E893F112CA876D005CBD2E /* AudioFile.m */,
+			);
+			name = Audio;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -313,6 +341,8 @@
 				D6F89769129872C7005ACC75 /* WaypointDetailsController.m in Sources */,
 				D6970C6D1299C5E8005E33E8 /* UITextViewInputAccessory.m in Sources */,
 				D6A8AE621299CBF30067F21D /* UITextFieldAccessoryView.m in Sources */,
+				D6433CB8129E1B9C005345F4 /* AudioService.m in Sources */,
+				D6E893F212CA876D005CBD2E /* AudioFile.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -330,6 +360,7 @@
 				GCC_PREFIX_HEADER = YouTour_Prefix.pch;
 				INFOPLIST_FILE = "YouTour-Info.plist";
 				PRODUCT_NAME = YouTour;
+				SDKROOT = iphoneos4.2;
 			};
 			name = Debug;
 		};
@@ -355,7 +386,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 			};
 			name = Debug;
 		};
@@ -369,7 +400,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PREBINDING = NO;
-				SDKROOT = iphoneos4.1;
+				SDKROOT = iphoneos;
 			};
 			name = Release;
 		};

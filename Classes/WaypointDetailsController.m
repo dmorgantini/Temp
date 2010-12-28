@@ -8,9 +8,15 @@
 
 #import "WaypointDetailsController.h"
 #import "Waypoint.h"
+#import "AudioService.h"
+
 @implementation WaypointDetailsController
 
-@synthesize waypoint, titleText, audioText, delegate, navTitle;
+// instance vars
+@synthesize waypoint, titleText, audioText, delegate, navTitle, recordButton, playButton;
+
+// services
+@synthesize audioService;
 
 NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your audio text here.";
 
@@ -18,11 +24,16 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.audioService = [[AudioService alloc] init];
+    isRecording = false;
+    
     audioCell.selectionStyle = UITableViewCellSelectionStyleNone;
     titleCell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     self.navTitle.title = waypoint.title;
     titleText.text = waypoint.title;
+    
+    recordButton.possibleTitles = [NSSet setWithObjects:@"Record", @"Stop", nil];
     
     if (!waypoint.audioText)
     {
@@ -32,6 +43,38 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
     {
         audioText.text = waypoint.audioText;
     }
+    
+    if (![self.audioService hasAudioFile])
+    {
+        self.playButton.enabled = NO; 
+    }
+}
+
+- (void) audioPlayerDidFinishPlaying: (AVAudioPlayer *) player
+                        successfully: (BOOL) completed {
+    if (completed == YES) {
+        self.playButton.title = @"Play";
+        isPlaying = NO;
+    }
+}
+
+-(IBAction) playAudio
+{
+    
+    if (!isPlaying)
+    {
+        [audioService startPlaying:self];
+        self.playButton.title = @"Stop";
+        isPlaying = YES;
+    }
+    else
+    {
+        [audioService stopPlaying];
+        self.playButton.title = @"Play";
+        isPlaying = NO;
+        
+    }
+        
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView
@@ -77,19 +120,31 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
     return height;
 }
 
+-(void) closeDetailsView
+{
+    [self.audioService clearTempAudioFile];
+    [self.delegate controllerDidFinish:self];
+}
+
 -(IBAction) saveWaypoint
 {
     self.waypoint.title = titleText.text;
     if (![audioText.text isEqualToString:DEFAULT_AUDIO])
         self.waypoint.audioText = audioText.text;
     
-    [self.delegate controllerDidFinish:self];
+    if ([audioService hasAudioFile])
+    {
+        [self.waypoint saveAudioData:[self.audioService getSoundFile] 
+                       withExtension:self.audioService.currentExtension];
+        [self.audioService clearTempAudioFile];
+    }
+    [self closeDetailsView];
+        
 }
-
 
 -(IBAction) cancelClick
 {
-    [self.delegate controllerDidFinish:self];
+    [self closeDetailsView];
 }
 
 -(IBAction) doneTitleText
@@ -105,6 +160,23 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
     [audioText resignFirstResponder];
 }
 
+-(IBAction) recordAudio
+{
+    if (isRecording)
+    {
+        [audioService stopRecording];
+        recordButton.title = @"Record";
+        isRecording = false;
+        self.playButton.enabled = YES;
+    }
+    else
+    {
+        [audioService startRecording];
+        recordButton.title = @"Stop";
+        isRecording = true;
+        self.playButton.enabled = NO;
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     // Releases the view if it doesn't have a superview.
@@ -114,6 +186,7 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
 }
 
 - (void)viewDidUnload {
+    self.audioService = nil;
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -121,6 +194,7 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
 
 
 - (void)dealloc {
+    [audioService release];
     [super dealloc];
 }
 
