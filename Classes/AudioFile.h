@@ -11,11 +11,16 @@
 
 @interface AudioFile : NSObject {
 @private
-    
+
 }
 
-@property (retain, nonatomic) NSURL* soundFileURL;
-+(AudioFile*)createTempAudioFile;
+@property (retain, nonatomic) NSURL* url;
+
+-(void) logDebug;
+-(void) deleteFile;
+
+
++(AudioFile*)createTempAudioFile:(AudioFile*)fromAudioFile;
 
 
 @end

@@ -2,9 +2,9 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1024</int>
-		<string key="IBDocument.SystemVersion">10F569</string>
+		<string key="IBDocument.SystemVersion">10H574</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1222</string>
-		<string key="IBDocument.AppKitVersion">1038.29</string>
+		<string key="IBDocument.AppKitVersion">1038.35</string>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
 			<string>IBUIBarButtonItem</string>
@@ -90,7 +90,6 @@
 						<string key="NSFrame">{{0, 416}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -162,7 +161,7 @@
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
 			</object>
 			<object class="IBUITableViewCell" id="909390706">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">308</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="680537109">
@@ -223,7 +222,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 156}</string>
-				<reference key="NSSuperview"/>
 				<reference key="NSNextKeyView" ref="680537109"/>
 				<reference key="IBUIBackgroundColor" ref="847251764"/>
 				<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -301,7 +299,7 @@
 				<bool key="IBUIShouldIndentWhileEditing">NO</bool>
 			</object>
 			<object class="IBUIView" id="89549785">
-				<reference key="NSNextResponder"/>
+				<nil key="NSNextResponder"/>
 				<int key="NSvFlags">292</int>
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIToolbar" id="653925509">
@@ -309,8 +307,6 @@
 						<int key="NSvFlags">266</int>
 						<string key="NSFrame">{{0, -6}, {320, 44}}</string>
 						<reference key="NSSuperview" ref="89549785"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 						<string key="targetRuntimeIdentifier">IBCocoaTouchFramework</string>
@@ -330,8 +326,6 @@
 					</object>
 				</array>
 				<string key="NSFrameSize">{320, 35}</string>
-				<reference key="NSSuperview"/>
-				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="653925509"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -455,6 +449,46 @@
 						<reference key="destination" ref="372490531"/>
 					</object>
 					<int key="connectionID">60</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">navTitle</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="955090942"/>
+					</object>
+					<int key="connectionID">65</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">recordButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="360209369"/>
+					</object>
+					<int key="connectionID">66</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">recordAudio</string>
+						<reference key="source" ref="360209369"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">67</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">playButton</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="135516981"/>
+					</object>
+					<int key="connectionID">68</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchEventConnection" key="connection">
+						<string key="label">playAudio</string>
+						<reference key="source" ref="135516981"/>
+						<reference key="destination" ref="372490531"/>
+					</object>
+					<int key="connectionID">69</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -659,7 +693,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">64</int>
+			<int key="maxID">69</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -682,12 +716,16 @@
 						<string key="cancelClick">id</string>
 						<string key="doneAudioText">id</string>
 						<string key="doneTitleText">id</string>
+						<string key="playAudio">id</string>
+						<string key="recordAudio">id</string>
 						<string key="saveWaypoint">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="audioCell">UITableViewCell</string>
 						<string key="audioText">UITextView</string>
 						<string key="navTitle">UINavigationItem</string>
+						<string key="playButton">UIBarButtonItem</string>
+						<string key="recordButton">UIBarButtonItem</string>
 						<string key="tableView">UITableView</string>
 						<string key="titleCell">UITableViewCell</string>
 						<string key="titleText">UITextField</string>

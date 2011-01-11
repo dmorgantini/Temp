@@ -13,7 +13,7 @@
 
 @implementation Waypoint
 
-@synthesize coordinate, title, audioText, waypointId;
+@synthesize coordinate, title, audioText, waypointId, audioFile;
 
 -initWithCoordinate:(CLLocationCoordinate2D)inCoord
 {
@@ -40,21 +40,31 @@
     
 }
 
--(void) saveAudioData:(NSData *)data withExtension:(NSString*) ext
+-(void)saveAudioFile:(AudioFile *)audioFile
 {
     
-    NSString* fileName = [self.waypointId stringByAppendingString:[@"." stringByAppendingString: ext]];
-    
-    NSString *tempDir = NSTemporaryDirectory ();
-    NSString *soundFilePath = [tempDir stringByAppendingString: fileName];
-    
-    NSError* err = nil;
-    
-    if (![data writeToFile:soundFilePath options:NSDataWritingAtomic error:&err])
-    {
-        NSLog(@"write to file: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
-        return;   
-    }
 }
+
+-(bool)hasAudio
+{
+    return NO;
+}
+
+//-(void) saveAudioData:(NSData *)data withExtension:(NSString*) ext
+//{
+//    
+//    NSString* fileName = [self.waypointId stringByAppendingString:[@"." stringByAppendingString: ext]];
+//    
+//    NSString *tempDir = NSTemporaryDirectory ();
+//    NSString *soundFilePath = [tempDir stringByAppendingString: fileName];
+//    
+//    NSError* err = nil;
+//    
+//    if (![data writeToFile:soundFilePath options:NSDataWritingAtomic error:&err])
+//    {
+//        NSLog(@"write to file: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
+//        return;   
+//    }
+//}
 
 @end
