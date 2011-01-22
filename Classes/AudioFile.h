@@ -10,15 +10,16 @@
 
 
 @interface AudioFile : NSObject {
-@private
-
+    NSURL* url;
 }
 
 @property (retain, nonatomic) NSURL* url;
 
+
+-(id) initWithUrl: (NSURL*) fileUrl;
 -(void) logDebug;
 -(void) deleteFile;
-
+-(void) moveFrom: (NSURL*) fromUrl;
 
 +(AudioFile*)createTempAudioFile:(AudioFile*)fromAudioFile;
 

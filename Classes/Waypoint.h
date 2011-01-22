@@ -15,6 +15,7 @@
     NSString* title;
     NSString* audioText;
     NSString* waypointId;
+    AudioFile* audioFile;
 }
 
 @property (nonatomic, retain) NSString* title;
@@ -23,8 +24,7 @@
 @property (nonatomic, retain) AudioFile* audioFile;
 
 -(bool) isTooCloseToo: (Waypoint*) waypoint;
--(bool) hasAudio;
--(void) saveAudioFile: (AudioFile*) audioFile;
+-(void) saveAudioFile: (AudioFile*) newAudioFile;
 
 
 @end

@@ -133,8 +133,9 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
     self.waypoint.title = titleText.text;
     if (![audioText.text isEqualToString:DEFAULT_AUDIO])
         self.waypoint.audioText = audioText.text;
-
-    [self.waypoint saveAudioFile:tempAudioFile];    
+    
+    [self.waypoint saveAudioFile:tempAudioFile];
+    [self closeDetailsView];
 }
 
 -(IBAction) cancelClick
@@ -190,6 +191,7 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
 
 - (void)dealloc {
     [audioService release];
+    [tempAudioFile release];
     [super dealloc];
 }
 

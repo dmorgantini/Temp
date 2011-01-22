@@ -7,15 +7,17 @@
 //
 
 #import "AudioFile.h"
-
-
 @implementation AudioFile
 
 @synthesize url;
 
-- (id)init {
+- (id)init: (NSString*) filePath {
+    return [self initWithUrl: [NSURL fileURLWithPath:filePath]];
+}
+
+- (id)initWithUrl: (NSURL*) fileUrl {
     if ((self = [super init])) {
-        // Initialization code here.
+        self.url = fileUrl;
     }
     
     return self;
@@ -30,32 +32,47 @@
                           attributesOfItemAtPath:[self.url path] 
                           error:nil];
     UInt32 size = [attr fileSize];
-    NSLog(@"Audio File Size: %d",size);
+    NSLog(@"Audio File Size: %lu",size);
 }
 
 -(void) deleteFile
 {
+    if (self.url == nil)
+        return;
     
+    [[NSFileManager defaultManager] removeItemAtURL:self.url error:nil]; // TODO: error handle here
+    self.url = nil;
+}
+
+-(void)moveFrom: (NSURL*)fromUrl
+{
+    
+    NSError *err;
+    [[NSFileManager defaultManager] moveItemAtURL:fromUrl toURL:self.url error:&err];
+    if (err)
+    {
+        NSLog(@"Move Audio File Failure: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
+        return;
+    }
 }
 
 - (void)dealloc {
-    // Clean-up code here.
-    
+    [self.url release];
     [super dealloc];
 }
 
 +(AudioFile *)createTempAudioFile:(AudioFile *)fromAudioFile
 {
-    if (fromAudioFile == nil)
+    NSString* tempPath = [NSTemporaryDirectory() stringByAppendingString:@"tempAudio.caf"];
+    if (fromAudioFile != nil)
     {
-        
-        return nil;
-    }
-    else
-    {
-        
+        [[NSFileManager defaultManager] 
+            copyItemAtURL:fromAudioFile.url 
+            toURL:[NSURL fileURLWithPath:tempPath] // Do I need to release this?
+            error:nil]; // TODO: Error handle here
     }
     
+    return [[[AudioFile alloc] init:tempPath] autorelease];    
 }
 
 @end

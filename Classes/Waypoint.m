@@ -8,6 +8,7 @@
 
 #import "Waypoint.h"
 #import "StringExtensions.h"
+#import "AudioFile.h"
 
 #define MINIMUM_DELTA_METERS 10.0
 
@@ -17,7 +18,7 @@
 
 -initWithCoordinate:(CLLocationCoordinate2D)inCoord
 {
-    if (self = [super init])
+    if ((self = [super init]))
     {
         coordinate = inCoord;
         waypointId = [NSString stringWithUUID];
@@ -40,31 +41,23 @@
     
 }
 
--(void)saveAudioFile:(AudioFile *)audioFile
+-(NSURL*) getTempWaypointPath
 {
+    NSString* fileName = [NSString stringWithFormat:@"%@.caf", self.waypointId];
+        
+    NSString *tempDir = NSTemporaryDirectory ();
+    NSString *fullPath = [tempDir stringByAppendingString: fileName];
+    return [NSURL fileURLWithPath:fullPath];
+}
+
+-(void)saveAudioFile:(AudioFile *)newAudioFile
+{
+    if (self.audioFile != nil)
+        [self.audioFile deleteFile];
     
+    self.audioFile = [[AudioFile alloc] initWithUrl:[self getTempWaypointPath]];
+    [self.audioFile moveFrom:newAudioFile.url];
 }
 
--(bool)hasAudio
-{
-    return NO;
-}
-
-//-(void) saveAudioData:(NSData *)data withExtension:(NSString*) ext
-//{
-//    
-//    NSString* fileName = [self.waypointId stringByAppendingString:[@"." stringByAppendingString: ext]];
-//    
-//    NSString *tempDir = NSTemporaryDirectory ();
-//    NSString *soundFilePath = [tempDir stringByAppendingString: fileName];
-//    
-//    NSError* err = nil;
-//    
-//    if (![data writeToFile:soundFilePath options:NSDataWritingAtomic error:&err])
-//    {
-//        NSLog(@"write to file: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
-//        return;   
-//    }
-//}
 
 @end
