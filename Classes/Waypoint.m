@@ -52,12 +52,17 @@
 
 -(void)saveAudioFile:(AudioFile *)newAudioFile
 {
-    if (self.audioFile != nil)
-        [self.audioFile deleteFile];
-    
     self.audioFile = [[AudioFile alloc] initWithUrl:[self getTempWaypointPath]];
-    [self.audioFile moveFrom:newAudioFile.url];
+    [self.audioFile moveDataFrom:newAudioFile.url];
 }
 
+-(void)dealloc
+{
+    [title release];
+    [audioText release];
+    [waypointId release];
+    [audioFile release];
+    [super dealloc];
+}
 
 @end

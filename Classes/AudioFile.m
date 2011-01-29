@@ -35,19 +35,31 @@
     NSLog(@"Audio File Size: %lu",size);
 }
 
--(void) deleteFile
+-(void) clearData
 {
-    if (self.url == nil)
-        return;
+    NSError *err = nil;
     
-    [[NSFileManager defaultManager] removeItemAtURL:self.url error:nil]; // TODO: error handle here
-    self.url = nil;
+    [[NSFileManager defaultManager] removeItemAtURL:self.url error:&err];
+    
+    if (err)
+    {
+        NSLog(@"Clear Audio File Failure: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
+        return;
+    }
 }
 
--(void)moveFrom: (NSURL*)fromUrl
+-(bool) hasData
 {
+    return self.url != nil && [[NSFileManager defaultManager] fileExistsAtPath:[self.url path]];
+}
+
+
+-(void)moveDataFrom: (NSURL*)fromUrl
+{
+    if ([self hasData])
+        [self clearData];
     
-    NSError *err;
+    NSError *err = nil;
     [[NSFileManager defaultManager] moveItemAtURL:fromUrl toURL:self.url error:&err];
     if (err)
     {
@@ -56,14 +68,29 @@
     }
 }
 
+-(void)copyDataFrom:(NSURL*)fromUrl
+{
+    if ([self hasData])
+        [self clearData];
+    
+    NSError *err = nil;
+    [[NSFileManager defaultManager] copyItemAtURL:fromUrl toURL:self.url error:&err];
+    if (err)
+    {
+        NSLog(@"Copy Audio File Failure: %@ %d %@", [err domain], [err code], [[err userInfo] description]);
+        return;
+    }
+}
+
 - (void)dealloc {
-    [self.url release];
+    [url release];
     [super dealloc];
 }
 
 +(AudioFile *)createTempAudioFile:(AudioFile *)fromAudioFile
 {
     NSString* tempPath = [NSTemporaryDirectory() stringByAppendingString:@"tempAudio.caf"];
+    
     if (fromAudioFile != nil)
     {
         [[NSFileManager defaultManager] 

@@ -124,7 +124,7 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
 
 -(void) closeDetailsView
 {
-    [tempAudioFile deleteFile];
+    [tempAudioFile clearData];
     [self.delegate controllerDidFinish:self];
 }
 
@@ -190,6 +190,12 @@ NSString * const DEFAULT_AUDIO = @"To achieve accessibility rating, enter your a
 
 
 - (void)dealloc {
+    [audioText release];
+    [titleText release];
+    [waypoint release];
+    [navTitle release];
+    [recordButton release];
+    [playButton release];
     [audioService release];
     [tempAudioFile release];
     [super dealloc];

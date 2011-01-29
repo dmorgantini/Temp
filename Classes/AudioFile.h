@@ -18,8 +18,10 @@
 
 -(id) initWithUrl: (NSURL*) fileUrl;
 -(void) logDebug;
--(void) deleteFile;
--(void) moveFrom: (NSURL*) fromUrl;
+-(void) clearData;
+-(void) moveDataFrom: (NSURL*) fromUrl;
+-(void) copyDataFrom: (NSURL*) fromUrl;
+-(bool) hasData;
 
 +(AudioFile*)createTempAudioFile:(AudioFile*)fromAudioFile;
 

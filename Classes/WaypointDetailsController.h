@@ -13,6 +13,7 @@
 
 @class Waypoint;
 @class AudioService;
+@class AudioFile;
 
 @interface WaypointDetailsController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, AVAudioPlayerDelegate> {
     IBOutlet UITableView *tableView;
@@ -30,6 +31,7 @@
     bool isRecording;
     bool isPlaying;
     AudioService* audioService;
+    AudioFile* tempAudioFile;
     
     id <ControllerFinishedDelegate> delegate;
 }
