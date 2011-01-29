@@ -17,13 +17,13 @@
 @implementation NSString (extensions)
 
 + (NSString*) stringWithUUID {
-//    CFUUIDRef	uuidObj = CFUUIDCreate(nil);//create a new UUID
-//    //get the string representation of the UUID
-//    NSString	*uuidString = (NSString*)CFUUIDCreateString(nil, uuidObj);
-//    CFRelease(uuidObj);
-//    return [uuidString autorelease];
+    CFUUIDRef	uuidObj = CFUUIDCreate(nil);//create a new UUID
+    //get the string representation of the UUID
+    NSString	*uuidString = (NSString*)CFUUIDCreateString(nil, uuidObj);
+    CFRelease(uuidObj);
+    return [uuidString autorelease];
     
-    return @"abcd-1234-5678-9120";
+    //return @"abcd-1234-5678-9120";
 }
 
 @end

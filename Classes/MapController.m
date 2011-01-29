@@ -170,8 +170,7 @@ saveTourButton, nextToobarButton, previousToobarButton, currentButton, waypointT
 
 -(void) dropWaypoint:(id)sender
 {
-    
-    // memory leak here???
+
     self.currentWaypoint = [[Waypoint alloc] initWithCoordinate:self.locationManager.location.coordinate];
     
     bool canBeAdded = [self.tour testWaypoint: self.currentWaypoint];

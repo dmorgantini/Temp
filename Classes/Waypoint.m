@@ -21,7 +21,7 @@
     if ((self = [super init]))
     {
         coordinate = inCoord;
-        waypointId = [NSString stringWithUUID];
+        self.waypointId = [NSString stringWithUUID];
     }
     
 	return self;

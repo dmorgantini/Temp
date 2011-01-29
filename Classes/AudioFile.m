@@ -90,7 +90,7 @@
 +(AudioFile *)createTempAudioFile:(AudioFile *)fromAudioFile
 {
     NSString* tempPath = [NSTemporaryDirectory() stringByAppendingString:@"tempAudio.caf"];
-    
+    AudioFile* temp = [[AudioFile alloc] init:tempPath];    
     if (fromAudioFile != nil)
     {
         [[NSFileManager defaultManager] 
@@ -98,8 +98,13 @@
             toURL:[NSURL fileURLWithPath:tempPath] // Do I need to release this?
             error:nil]; // TODO: Error handle here
     }
-    
-    return [[[AudioFile alloc] init:tempPath] autorelease];    
+    else
+    {
+        if ([temp hasData])
+            [temp clearData];
+    }
+
+    return [temp autorelease];    
 }
 
 @end

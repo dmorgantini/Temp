@@ -75,6 +75,8 @@
      Called when the application is about to terminate.
      See also applicationDidEnterBackground:.
      */
+    
+    // TODO: clear all the waypoints!!
 }
 
 

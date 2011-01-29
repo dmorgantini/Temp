@@ -47,12 +47,11 @@
         return;
     }
     
-    if ([audioPlayer url] != audioFile.url){
-        self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: audioFile.url
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL: audioFile.url
                                            error: nil];
     
-        [audioPlayer prepareToPlay];
-    }
+    [audioPlayer prepareToPlay];
+    
     
     [audioPlayer setDelegate: playingDelegate];
     

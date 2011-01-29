@@ -40,7 +40,7 @@
 -(bool) addRouteLocation:(CLLocation *)newLocation
 {
 #if !(TARGET_IPHONE_SIMULATOR)
-    if (newLocation.horizontalAccuracy >= 20)
+    if (newLocation.horizontalAccuracy > 50)
     {
         NSLog(@"Rejecting horizontal accuracy of: %f", newLocation.horizontalAccuracy);
         return NO;
@@ -56,6 +56,8 @@
 #endif
     
     [self.route addLocation: newLocation];
+    
+    // normalize location based on accuracy?
     
     return YES;
     

@@ -26,6 +26,7 @@
     
     IBOutlet UIBarButtonItem *recordButton;
     IBOutlet UIBarButtonItem *playButton;
+    IBOutlet UIBarButtonItem *clearButton;
     
     Waypoint* waypoint;
     bool isRecording;
@@ -43,6 +44,7 @@
 @property (nonatomic, retain) UINavigationItem *navTitle;
 @property (nonatomic, retain) UIBarButtonItem *recordButton;
 @property (nonatomic, retain) UIBarButtonItem *playButton;
+@property (nonatomic, retain) UIBarButtonItem *clearButton;
 @property (nonatomic, retain) AudioService* audioService;
 
 -(IBAction) cancelClick;
